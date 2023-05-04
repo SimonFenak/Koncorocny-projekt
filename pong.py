@@ -39,10 +39,12 @@ def pong():
     tlacitko = pygame.image.load("menu-bar.png")
     mensie =pygame.transform.scale(tlacitko, (50, 50))
     zastavene=False
-    minihry = pygame.image.load("minihry.png").convert()
+    minihry = pygame.image.load("minihry.png").convert_alpha()
     minihrymen = pygame.transform.scale(minihry, (180, 80))
-    ukoncit = pygame.image.load("ukoncit.png").convert()
+    ukoncit = pygame.image.load("ukoncit.png").convert_alpha()
     ukoncitmen = pygame.transform.scale(ukoncit, (180, 80))
+    start = pygame.image.load("start.png").convert_alpha()
+    startmen = pygame.transform.scale(start, (180, 80))
     font = pygame.font.Font(None, 36)
     nadpis = pygame.font.Font(None, 50)
     text = nadpis.render("Ping Pong!!", True, (255, 255, 255))
@@ -76,7 +78,7 @@ def pong():
 
             if ball_x < 0:
                 movement = [0, 0]
-                hrac1_body += 1
+                hrac2_body += 1
                 ball_x = 10
                 ball_y = ploska1_y + 30
                 movement = [random.choice([-1, 1]), random.choice([1, -1])]
@@ -84,7 +86,7 @@ def pong():
                 movement[1] = 1
             if ball_x > (WIDTH - BALL_SIZE):
                 movement = [0, 0]
-                hrac2_body += 1
+                hrac1_body += 1
                 ball_x = WIDTH - 30
                 ball_y =  ploska2_y + 30
                 movement=[random.choice([-1, 1]), random.choice([1, -1])]
@@ -112,8 +114,9 @@ def pong():
         else:
 
             pygame.draw.rect(screen, (200, 200, 200), pause())
-            screen.blit(minihrymen, (60, 200))
-            screen.blit(ukoncitmen, (60, 300))
+            screen.blit(startmen, (60, 200))
+            screen.blit(minihrymen, (60, 300))
+            screen.blit(ukoncitmen, (60, 400))
             screen.blit(mensie, (10, 10))
             screen.blit(text, (350, 200))
             screen.blit(text1, (350, 250))
@@ -130,10 +133,13 @@ def pong():
                         if xpsova < 110 and xpsova > 10 and ypsilonova < 110 and ypsilonova > 10:
                             zastavene = False
                         if xpsova < 240 and xpsova > 60 and ypsilonova < 280 and ypsilonova > 200:
+
+                            zastavene = False
+                        if xpsova < 240 and xpsova > 60 and ypsilonova < 380 and ypsilonova > 300:
                             os.startfile("menu.py")
                             running = False
                             zastavene = False
-                        if xpsova < 240 and xpsova > 60 and ypsilonova < 380 and ypsilonova > 300:
+                        if xpsova < 240 and xpsova > 60 and ypsilonova < 480 and ypsilonova > 400:
                             running = False
                             zastavene = False
 
