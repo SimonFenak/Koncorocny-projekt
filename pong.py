@@ -45,6 +45,8 @@ def pong():
     ukoncitmen = pygame.transform.scale(ukoncit, (180, 80))
     start = pygame.image.load("start.png").convert_alpha()
     startmen = pygame.transform.scale(start, (180, 80))
+    side = pygame.image.load("sidebar.png").convert_alpha()
+    sidemen = pygame.transform.scale(side, (300, 660))
     font = pygame.font.Font(None, 36)
     nadpis = pygame.font.Font(None, 50)
     text = nadpis.render("Ping Pong!!", True, (255, 255, 255))
@@ -112,8 +114,8 @@ def pong():
             pygame.display.flip()
             clock.tick(60)
         else:
-
-            pygame.draw.rect(screen, (200, 200, 200), pause())
+            screen.blit(sidemen, (0, 0))
+            screen.blit(startmen, (60, 200))
             screen.blit(startmen, (60, 200))
             screen.blit(minihrymen, (60, 300))
             screen.blit(ukoncitmen, (60, 400))
