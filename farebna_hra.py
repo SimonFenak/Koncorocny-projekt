@@ -1,11 +1,11 @@
 import random
 import pygame
 
+SIRKA = 14
+VYSKA = 11
 
-SIRKA = 20
-VYSKA = 15
+VELKOST = 60
 
-VELKOST = 40
 
 FARBY = {
     0: (255, 0, 0),
@@ -18,7 +18,7 @@ FARBY = {
 
 CISLA_FARIEB = tuple(FARBY.keys())
 
-tahy = []
+
 
 def vytvor_pole():
     pole = []
@@ -27,8 +27,12 @@ def vytvor_pole():
     return pole
 
 
+
+
 def stvorec(x, y):
     return pygame.Rect(x * VELKOST, y * VELKOST, VELKOST, VELKOST)
+
+
 
 
 def vykresli_pole(screen, pole):
@@ -50,8 +54,10 @@ def vylej_farbu(pole, farba_pred, farba, x, y):
         vylej_farbu(pole, farba_pred, farba, x + 1, y)
 
 
+
+
 def vylej_farbu2(pole, farba_pred, farba, x, y):
-    if not (0 <= x < SIRKA and 0 <= y < VYSKA):  # oprevena podmienka
+    if not (0 <= x < SIRKA and 0 <= y < VYSKA):  # opravena podmienka
         return
     if farba_pred != pole[y][x]:
         return
@@ -60,43 +66,161 @@ def vylej_farbu2(pole, farba_pred, farba, x, y):
         vylej_farbu2(pole, farba_pred, farba, x + dx, y + dy)
 
 
+
+
+
 def mys_klik(mys_pos, pole):
     for y, riadok in enumerate(pole):
         for x, index_farby in enumerate(riadok):
             if stvorec(x, y).collidepoint(mys_pos):
-                farba_pred = pole[0][0]  # pred zavolanim vyliatia farby,
-                # kontrolujem, ci som neklikol na tu istu farbu
+                farba_pred = pole[0][0]
                 if farba_pred != index_farby:
                     vylej_farbu2(pole, farba_pred, index_farby, 0, 0)
 
 
+
+
+
+
+def zisti_koniec(pole):
+    policko = pole[0][0]
+    for sirka in range(SIRKA):
+        for vyska in range(VYSKA):
+            if policko!=pole[vyska][sirka]:
+                return
+    return 1
+
+def vyhodnotenie(kroky):
+    kroky=str(kroky)
+    return kroky
 def hra():
+    kroky = 0
     screen = pygame.display.set_mode((SIRKA * VELKOST, VYSKA * VELKOST))
     pole = vytvor_pole()
     clock = pygame.time.Clock()
+    vykresli_pole(screen, pole)
+    pygame.display.flip()
     running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mys_klik(pygame.mouse.get_pos(), pole)
-                tahy.append(1)
-        vykresli_pole(screen, pole)
-        pygame.display.flip()
-        if pole[0] and pole[1] and pole[2] and pole[3] and pole[4] and pole[5] and pole[6] and pole[7] and pole[8] and pole[9] and pole[10] and pole[11] and pole[12] and pole[13] and pole[14] == [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] or pole[0] and pole[1] and pole[2] and pole[3] and pole[4] and pole[5] and pole[6] and pole[7] and pole[8] and pole[9] and pole[10] and pole[11] and pole[12] and pole[13] and pole[14] == [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] or pole[0] and pole[1] and pole[2] and pole[3] and pole[4] and pole[5] and pole[6] and pole[7] and pole[8] and pole[9] and pole[10] and pole[11] and pole[12] and pole[13] and pole[14] == [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] or pole[0] and pole[1] and pole[2] and pole[3] and pole[4] and pole[5] and pole[6] and pole[7] and pole[8] and pole[9] and pole[10] and pole[11] and pole[12] and pole[13] and pole[14] == [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3] or pole[0] and pole[1] and pole[2] and pole[3] and pole[4] and pole[5] and pole[6] and pole[7] and pole[8] and pole[9] and pole[10] and pole[11] and pole[12] and pole[13] and pole[14] == [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4] or pole[0] and pole[1] and pole[2] and pole[3] and pole[4] and pole[5] and pole[6] and pole[7] and pole[8] and pole[9] and pole[10] and pole[11] and pole[12] and pole[13] and pole[14] == [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]:
-            return
+    tlacitko = pygame.image.load("menu-bar.png")
+    mensie = pygame.transform.scale(tlacitko, (50, 50))
+    zastavene = True
+    minihry = pygame.image.load("minihry.png").convert_alpha()
+    minihrymen = pygame.transform.scale(minihry, (180, 80))
+    ukoncit = pygame.image.load("ukoncit.png").convert_alpha()
+    ukoncitmen = pygame.transform.scale(ukoncit, (180, 80))
+    start = pygame.image.load("start.png").convert_alpha()
+    startmen = pygame.transform.scale(start, (180, 80))
+    side = pygame.image.load("sidebar.png").convert_alpha()
+    sidemen = pygame.transform.scale(side, (300, 660))
+    font = pygame.font.Font(None, 36)
+    nadpis = pygame.font.Font(None, 50)
+    text = nadpis.render("Farebné Štvorce!!", True, (0, 0, 0))
+    text1 = font.render("Vitajte v Farebnej hre je určená ", True, (0, 0, 0))
+    text2 = font.render("pre jedného hráčov. Ulohou je aby", True, (0, 0, 0))
+    text3 = font.render("hráč vymaľoval celé pole jednou farbou.", True, (0, 0, 0))
+    koniec = nadpis.render("Koniec!", True, (0, 0, 0))
+    hodnot=False
+    totalitnykonec=False
+    pygame.display.flip()
+    while running==True:
         clock.tick(60)
+        if zastavene == False:
+            screen.blit(mensie, (10, 10))
+            vykresli_pole(screen, pole)
+            screen.blit(mensie, (10, 10))
+            pygame.display.flip()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    xpsova, ypsilonova = event.pos
+                    mys_klik(pygame.mouse.get_pos(), pole)
+                    if zisti_koniec(pole) == 1:
+                        vyhodnotenie(kroky)
+                        hodnot=True
+                        running=False
+                        break
+                    screen.blit(mensie, (10, 10))
+                    if xpsova < 60 and xpsova > 10 and ypsilonova < 60 and ypsilonova > 10:
+                        zastavene = True
+                        break
+                    pygame.display.flip()
+                    kroky+=1
+            stlacene = pygame.key.get_pressed()
+            if stlacene[pygame.K_ESCAPE]:
+                zastavene = True
+                pygame.time.wait(500)
+
+            clock.tick(60)
+        else:
+            screen.blit(sidemen, (0, 0))
+            screen.blit(startmen, (60, 200))
+            screen.blit(minihrymen, (60, 300))
+            screen.blit(ukoncitmen, (60, 400))
+            screen.blit(mensie, (10, 10))
+            screen.blit(text, (350, 200))
+            screen.blit(text1, (350, 250))
+            screen.blit(text2, (350, 300))
+            screen.blit(text3, (350, 350))
+            pygame.display.flip()
+            while zastavene == True:
+
+
+                for event in pygame.event.get():
+
+                    if event.type == pygame.QUIT:
+                        running = False
+                        zastavene = False
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        xpsova, ypsilonova = event.pos
+                        if xpsova < 60 and xpsova > 10 and ypsilonova < 60 and ypsilonova > 10:
+                            zastavene = False
+                        if xpsova < 240 and xpsova > 60 and ypsilonova < 280 and ypsilonova > 200:
+                            zastavene = False
+                        if xpsova < 240 and xpsova > 60 and ypsilonova < 380 and ypsilonova > 300:
+                            running = False
+                            zastavene = False
+                        if xpsova < 240 and xpsova > 60 and ypsilonova < 480 and ypsilonova > 400:
+                            running = False
+                            zastavene = False
+                stlacene1 = pygame.key.get_pressed()
+                if stlacene1[pygame.K_ESCAPE]:
+                    zastavene = False
+                    pygame.time.wait(500)
+
+    if hodnot == True:
+        while totalitnykonec==False:
+
+            for event in pygame.event.get():
+
+                if event.type == pygame.QUIT:
+                    totalitnykonec= True
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    xpsova, ypsilonova = event.pos
+                    if xpsova < 500 and xpsova > 320 and ypsilonova < 560 and ypsilonova > 505:
+                        totalitnykonec=True
+                    if xpsova < 500 and xpsova > 320 and ypsilonova < 490 and ypsilonova > 430:
+                        print("fuckyou")
+                    if xpsova < 500 and xpsova > 320 and ypsilonova < 420 and ypsilonova > 360:
+                        print("polok")
+            cislo = nadpis.render("Počet tvojich krokov " + vyhodnotenie(kroky), True, (0, 0, 0))
+            screen.blit(cislo, (230, 300))
+            screen.blit(koniec, (350, 250))
+            screen.blit(startmen, (320, 350))
+            screen.blit(minihrymen, (320, 420))
+            screen.blit(ukoncitmen, (320, 490))
+            pygame.display.flip()
+
+    clock.tick(60)
+    pygame.display.flip()
 
 
 def main():
-    pocitadlo = 0
     pygame.init()
     hra()
-    for _ in tahy:
-        pocitadlo += 1
-    return pocitadlo
+    pygame.quit()
 
 
-print(f"Zabralo ti to:{main()}ťahov")
-pygame.quit()
+
+
+main()
