@@ -35,7 +35,7 @@ def get_button():
         about_menu_rect = screen.blit(about_menu, (320, 380))
         end_menu_rect = screen.blit(end_menu, (320, 460))
 
-        pygame.display.flip()
+        pygame.display.update()
 
 
 def main_menu():
@@ -50,6 +50,10 @@ def main_menu():
             menu = False
             pygame.quit()
             quit()
+        elif button == "Minihry":
+            import minihryexe
+            minihryexe.main()
+            pygame.quit()
         print(button)
         pygame.display.flip()
         clock.tick(60)
