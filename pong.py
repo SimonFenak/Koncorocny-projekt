@@ -1,6 +1,5 @@
 import pygame
 import random
-import subprocess
 
 WIDTH = 850
 HEIGHT = 660
@@ -39,9 +38,9 @@ def pong():
     tlacitko = pygame.image.load("menu-bar.png")
     mensie =pygame.transform.scale(tlacitko, (50, 50))
     zastavene=True
-    minihry = pygame.image.load("minihry.png").convert_alpha()
+    minihry = pygame.image.load("minihry1.png").convert_alpha()
     minihrymen = pygame.transform.scale(minihry, (180, 80))
-    ukoncit = pygame.image.load("ukoncit.png").convert_alpha()
+    ukoncit = pygame.image.load("ukoncit1.png").convert_alpha()
     ukoncitmen = pygame.transform.scale(ukoncit, (180, 80))
     start = pygame.image.load("start.png").convert_alpha()
     startmen = pygame.transform.scale(start, (180, 80))
@@ -141,22 +140,24 @@ def pong():
 
                             zastavene = False
                         if xpsova < 240 and xpsova > 60 and ypsilonova < 380 and ypsilonova > 300:
-                            subprocess.call(['python', './menu.py'])
+                            import minihryexe
+                            minihryexe.main()
                             running = False
                             zastavene = False
                         if xpsova < 240 and xpsova > 60 and ypsilonova < 480 and ypsilonova > 400:
                             running = False
                             zastavene = False
+                            pygame.quit()
                     stlacene1 = pygame.key.get_pressed()
                     if stlacene1[pygame.K_ESCAPE]:
                         zastavene = False
 
         pygame.display.flip()
 
-def main():
+def main_pong():
     pygame.init()
     pong()
     pygame.quit()
 
 if __name__ == '__main__':
-    main()
+    main_pong()
