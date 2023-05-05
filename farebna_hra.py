@@ -5,7 +5,7 @@ import pygame
 SIRKA = 20
 VYSKA = 15
 
-VELKOST = 30
+VELKOST = 40
 
 FARBY = {
     0: (255, 0, 0),
