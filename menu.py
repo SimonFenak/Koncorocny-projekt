@@ -15,7 +15,7 @@ def get_button():
     games_menu = pygame.image.load("minihry1.png").convert_alpha()
     about_menu = pygame.image.load("onas1.png").convert_alpha()
     end_menu = pygame.image.load("ukoncit1.png").convert_alpha()
-    
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -41,6 +41,8 @@ def get_button():
 def main_menu():
     menu = True
     clock = pygame.time.Clock()
+    banner = pygame.image.load("background.jpg").convert_alpha()
+    background = screen.blit(banner, (0,0))
     
     while menu:
         button = get_button()
