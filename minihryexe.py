@@ -10,7 +10,15 @@ SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 def get_button():
-    pong_game = pygame.image.load("pongy.png").convert_alpha()
+    pong_game = pygame.image.load("pong-navrh.png").convert_alpha()
+    color_game = pygame.image.load("tile.png").convert_alpha()
+    moon_game = pygame.image.load("tile.png").convert_alpha()
+    random_game = pygame.image.load("tile.png").convert_alpha()
+    random2_game = pygame.image.load("tile.png").convert_alpha()
+    random3_game = pygame.image.load("tile.png").convert_alpha()
+    back_to_menu = pygame.image.load("hlavnemenu.png").convert_alpha()
+    end_menu = pygame.image.load("ukoncit1.png").convert_alpha()
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -19,8 +27,37 @@ def get_button():
                 mouse_pos = pygame.mouse.get_pos()
                 if pong_game_rect.collidepoint(mouse_pos):
                     import pong
+                    pong.main_pong()
+                elif color_game_rect.collidepoint(mouse_pos):
+                    import farebna_hra
+                    farebna_hra.main()
+                elif moon_game_rect.collidepoint(mouse_pos):
+                    import lepsiag
+                    lepsiag.main()
+                elif random_game_rect.collidepoint(mouse_pos):
+                    import pong
                     pong.main_pong()   
+                elif random2_game_rect.collidepoint(mouse_pos):
+                    import pong
+                    pong.main_pong()   
+                elif random3_game_rect.collidepoint(mouse_pos):
+                    import pong
+                    pong.main_pong() 
+                elif back_to_menu_rect.collidepoint(mouse_pos):
+                    import menuexe
+                    menuexe.main_menu()
+                elif end_menu_rect.collidepoint(mouse_pos):
+                    return 0         
         pong_game_rect = screen.blit(pong_game, (50, 50))
+        color_game_rect = screen.blit(color_game, (300, 50))
+        moon_game_rect = screen.blit(moon_game, (550, 50))
+        random_game_rect = screen.blit(random_game, (50, 300))
+        random2_game_rect = screen.blit(random2_game, (300, 300))
+        random3_game_rect = screen.blit(random3_game, (550, 300))
+        back_to_menu_rect = screen.blit(back_to_menu, (170, 500))
+        end_menu_rect = screen.blit(end_menu, (470, 500))
+
+
         pygame.display.flip()
 
 
