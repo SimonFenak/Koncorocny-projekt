@@ -200,9 +200,9 @@ def hra():
                     if xpsova < 500 and xpsova > 320 and ypsilonova < 560 and ypsilonova > 505:
                         totalitnykonec=True
                     if xpsova < 500 and xpsova > 320 and ypsilonova < 490 and ypsilonova > 430:
-                        print("fuckyou")
+                        import menu
                     if xpsova < 500 and xpsova > 320 and ypsilonova < 420 and ypsilonova > 360:
-                        print("polok")
+                        main()
             cislo = nadpis.render("Počet tvojich krokov " + vyhodnotenie(kroky), True, (0, 0, 0))
             screen.blit(cislo, (230, 300))
             screen.blit(koniec, (350, 250))
