@@ -31,9 +31,9 @@ def volny_pad(pocet,cas):
     zastavene= False
     tlacitko = pygame.image.load("menu-bar.png")
     mensie = pygame.transform.scale(tlacitko, (50, 50))
-    minihry = pygame.image.load("minihry.png").convert_alpha()
+    minihry = pygame.image.load("minihry1.png").convert_alpha()
     minihrymen = pygame.transform.scale(minihry, (180, 80))
-    ukoncit = pygame.image.load("ukoncit.png").convert_alpha()
+    ukoncit = pygame.image.load("ukoncit1.png").convert_alpha()
     ukoncitmen = pygame.transform.scale(ukoncit, (180, 80))
     start = pygame.image.load("start.png").convert_alpha()
     startmen = pygame.transform.scale(start, (180, 80))
@@ -160,8 +160,8 @@ def volny_pad(pocet,cas):
 
 
                         if xpsova < 240 and xpsova > 60 and ypsilonova < 380 and ypsilonova > 300:
-                            import menu
-                            menu.main_menu()
+                            import minihryexe
+                            minihryexe.main()
                             running = False
                             zastavene = False
                         if xpsova < 240 and xpsova > 60 and ypsilonova < 480 and ypsilonova > 400:
@@ -178,7 +178,7 @@ def volny_pad(pocet,cas):
                     if xpsova < 500 and xpsova > 320 and ypsilonova < 560 and ypsilonova > 505:
                         totalitnykonec=True
                     if xpsova < 500 and xpsova > 320 and ypsilonova < 490 and ypsilonova > 430:
-                        import menu
+                        import menuexe
                     if xpsova < 500 and xpsova > 320 and ypsilonova < 420 and ypsilonova > 360:
                         import raketka
             cislo = nadpis.render("Počet úspešnych pokusov:" + str(pocet), True, (255, 255, 255))
