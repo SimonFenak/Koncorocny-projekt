@@ -180,6 +180,8 @@ def hra():
                         if xpsova < 240 and xpsova > 60 and ypsilonova < 380 and ypsilonova > 300:
                             running = False
                             zastavene = False
+                            import minihryexe
+                            minihryexe.main()
                         if xpsova < 240 and xpsova > 60 and ypsilonova < 480 and ypsilonova > 400:
                             running = False
                             zastavene = False
