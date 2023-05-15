@@ -5,8 +5,8 @@ white = (255, 255, 255)
 black = (0,0,0)
 
 #SCREEN
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 840
+SCREEN_HEIGHT = 660
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 

@@ -178,9 +178,12 @@ def volny_pad(pocet,cas):
                     if xpsova < 500 and xpsova > 320 and ypsilonova < 560 and ypsilonova > 505:
                         totalitnykonec=True
                     if xpsova < 500 and xpsova > 320 and ypsilonova < 490 and ypsilonova > 430:
-                        import menuexe
+                        import minihryexe
+                        minihryexe.main()
                     if xpsova < 500 and xpsova > 320 and ypsilonova < 420 and ypsilonova > 360:
-                        import raketka
+                        pocet = 0
+                        cas = time.time()
+                        main(pocet, cas)
             cislo = nadpis.render("Počet úspešnych pokusov:" + str(pocet), True, (255, 255, 255))
             screen.blit(cislo, (200, 300))
             screen.blit(koniec, (350, 250))
