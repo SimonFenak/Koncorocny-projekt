@@ -6,7 +6,7 @@ def kresli(screen,panak,labyrint):
             if labyrint[i][j] == "#":
                 pygame.draw.rect(screen,(255, 255, 50), pygame.Rect(j * 20,i * 20,20,20))
     pygame.draw.circle(screen, (0,0,255), (panak[0]*20+10,panak[1]*20+10), 10)
-    pygame.display.flip()
+    pygame.display.flip()  #komentar
 def main():
     panak = [1,1]
     pygame.init()
