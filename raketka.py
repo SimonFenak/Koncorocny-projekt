@@ -4,7 +4,7 @@ import time
 GRAVITY=0.04
 SIRKA = 840
 VYSKA = 660
-VELKOST = 30
+VELKOST = 60
 bullkit=[]
 ACCEL_Y=0.1
 ACCEL_X=0.07
@@ -39,6 +39,10 @@ def volny_pad(pocet,cas):
     startmen = pygame.transform.scale(start, (180, 80))
     side = pygame.image.load("sidebar.png").convert_alpha()
     sidemen = pygame.transform.scale(side, (300, 660))
+    raketka = pygame.image.load("raketkabezohna.png").convert_alpha()
+    upravenaraketka = pygame.transform.scale(raketka, (60, 60))
+    raketkaohen = pygame.image.load("raketkazohonom.png").convert_alpha()
+    upravenaraketkaohen = pygame.transform.scale(raketkaohen, (60, 60))
     font = pygame.font.Font(None, 36)
     hodnot=False
     nadpis = pygame.font.Font(None, 50)
@@ -66,6 +70,8 @@ def volny_pad(pocet,cas):
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_UP]:
             rychlost_y +=ACCEL_Y
+            screen.blit(upravenaraketkaohen, (pos_x, pos_y))
+            pygame.display.flip()
         if pressed[pygame.K_RIGHT] and konec==0:
             rychlost_x += ACCEL_X
         if pressed[pygame.K_LEFT] and konec==0:
@@ -82,7 +88,7 @@ def volny_pad(pocet,cas):
                 rychlost_x=0
                 rychlost_y=0
                 konec=1
-                pygame.draw.rect(screen, (255, 0, 0), stvorec(pos_x, pos_y))
+                screen.blit(upravenaraketka, (pos_x, pos_y))
                 pygame.display.flip()
                 pygame.time.wait(500)
             if konec==1:
@@ -107,7 +113,7 @@ def volny_pad(pocet,cas):
                 rychlost_x -= rychlost_x+1
 
                 pos_x=SIRKA-VELKOST
-            if pos_x >= poziciar-50 and pos_x <poziciar+50 and pos_y>625:
+            if pos_x >= poziciar-50 and pos_x <poziciar+50 and pos_y>595:
                 pocet += 1
                 if caspotom-cas>20:
                     hodnot=True
@@ -123,7 +129,7 @@ def volny_pad(pocet,cas):
             screen.blit(kolkocas,(650,5))
             screen.blit(vyhri, (700, 630))
             screen.blit(text_surface,(0,0))
-            pygame.draw.rect(screen,color,stvorec(pos_x,pos_y))
+            screen.blit(upravenaraketka, (pos_x, pos_y))
             pygame.draw.rect(screen, (255,255,255), plocha(poziciar))
             pygame.display.flip()
             clock.tick(60)
