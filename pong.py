@@ -1,5 +1,6 @@
 import pygame
 import random
+from pydub import AudioSegment
 
 WIDTH = 850
 HEIGHT = 660
@@ -18,12 +19,13 @@ def pause():
     return pygame.Rect(0, 0, 300,660)
 
 def pong():
+    pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     my_font = pygame.font.SysFont("Consolas", 30)
     clock = pygame.time.Clock()
     hrac1_body = 0
     hrac2_body = 0
-
+    sound = AudioSegment.from_file("beep-104060.mp3")
     running = True
     choices=[[10,HEIGHT / 2 - 50],[WIDTH - 30, HEIGHT / 2 - 50]]
     vyber=random.randint(0,1)
@@ -85,9 +87,11 @@ def pong():
                 hrac2_body += 1
                 ball_x = 10
                 ball_y = ploska1_y + 30
+                sound.play()
                 movement = [random.choice([-1, 1]), random.choice([1, -1])]
             if ball_y < 0:
                 movement[1] = 1
+                sound.play()
             if ball_x > (WIDTH - BALL_SIZE):
                 movement = [0, 0]
                 hrac1_body += 1
@@ -107,8 +111,10 @@ def pong():
             screen.blit(mensie, (10, 10))
             if pygame.Rect.colliderect(lopta, hrac1):
                 movement[0] = 1
+                sound.play()
             if pygame.Rect.colliderect(lopta, hrac2):
                 movement[0] = - 1
+                sound.play()
 
             text_surface = my_font.render(f"{hrac1_body} : {hrac2_body}", True, (255, 0, 0))
             screen.blit(text_surface, ((WIDTH - text_surface.get_width()) / 2, 0))
