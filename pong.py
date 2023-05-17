@@ -1,7 +1,7 @@
 import pygame
 import random
-from pydub import AudioSegment
-
+from pygame import mixer
+mixer.init()
 WIDTH = 850
 HEIGHT = 660
 BALL_SIZE = 20
@@ -20,12 +20,13 @@ def pause():
 
 def pong():
     pygame.init()
+    mixer.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     my_font = pygame.font.SysFont("Consolas", 30)
     clock = pygame.time.Clock()
     hrac1_body = 0
     hrac2_body = 0
-    sound = AudioSegment.from_file("beep-104060.mp3")
+    sound = mixer.Sound("beep-104060.mp3")
     running = True
     choices=[[10,HEIGHT / 2 - 50],[WIDTH - 30, HEIGHT / 2 - 50]]
     vyber=random.randint(0,1)
@@ -95,11 +96,13 @@ def pong():
             if ball_x > (WIDTH - BALL_SIZE):
                 movement = [0, 0]
                 hrac1_body += 1
+                sound.play()
                 ball_x = WIDTH - 30
                 ball_y =  ploska2_y + 30
                 movement=[random.choice([-1, 1]), random.choice([1, -1])]
             if ball_y > (HEIGHT - BALL_SIZE):
                 movement[1] = -1
+                sound.play()
             ball_x += BALL_SPEED * movement[0]
             ball_y += BALL_SPEED * movement[1]
             screen.fill((0,0,0))

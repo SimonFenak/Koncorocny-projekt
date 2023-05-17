@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 def kresli(screen,panak,labyrint):
     screen.fill((0, 0, 0))
     for i in range(len(labyrint)):
@@ -9,7 +10,9 @@ def kresli(screen,panak,labyrint):
     pygame.display.flip()  #komentar
 def main():
     panak = [1,1]
+    mixer.init()
     pygame.init()
+    sound = mixer.Sound("ough-47202.mp3")
     screen = pygame.display.set_mode((840, 660))
     f = open("labyrint.txt", "r")
     labyrint = f.read().split("\n")
@@ -39,7 +42,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT: running = False
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-                if labyrint[panak[1]][panak[0]+1]=="#":print("au")
+                if labyrint[panak[1]][panak[0]+1]=="#":sound.play()
                 elif labyrint[panak[1]][panak[0]+1]=="U":
                     vyhodnotenie=True
                     zastavene=True
@@ -47,21 +50,21 @@ def main():
                 else: panak[0] += 1
             if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
                 if labyrint[panak[1]][panak[0] - 1] == "#":
-                    pass
+                    sound.play()
                 elif labyrint[panak[1] + 1][panak[0]] == "U":
                     Vyhodnotenie=True
                 else:
                     panak[0] -= 1
             if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                 if labyrint[panak[1]-1][panak[0]] == "#":
-                    print("au")
+                    sound.play()
                 elif labyrint[panak[1] + 1][panak[0]] == "U":
                     Vyhodnotenie = True
                 else:
                     panak[1] -= 1
             if event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
                 if labyrint[panak[1]+1][panak[0]] == "#":
-                    print("au")
+                    sound.play()
                 elif labyrint[panak[1]+1][panak[0]] == "U":
                     Vyhodnotenie = True
                 else:
