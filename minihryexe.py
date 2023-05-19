@@ -11,7 +11,7 @@ SCREEN_WIDTH = 840
 SCREEN_HEIGHT = 660
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-def get_button():
+def get_button(sound):
     pong_game = pygame.image.load("pong-logo.png").convert_alpha()
     pong_game=pygame.transform.scale(pong_game, (200, 200))
     color_game = pygame.image.load("bludisko-logo.png").convert_alpha()
@@ -32,27 +32,35 @@ def get_button():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 if pong_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import pong
                     pong.main_pong()
                 elif color_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import farebna_hra
                     farebna_hra.main()
                 elif moon_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import raketka
                     raketka.main()
                 elif random_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import pong
                     pong.main_pong()   
                 elif random2_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import pong
                     pong.main_pong()   
                 elif random3_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import pong
                     pong.main_pong() 
                 elif back_to_menu_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import menuexe
                     menuexe.main_menu()
                 elif end_menu_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     return 0         
         pong_game_rect = screen.blit(pong_game, (50, 50))
         color_game_rect = screen.blit(color_game, (300, 50))
@@ -72,11 +80,11 @@ def main():
     clock = pygame.time.Clock()
     banner = pygame.image.load("background.jpg").convert_alpha()
     background = screen.blit(banner, (0,0))
-    sound = mixer.Sound("zaznam.mp3")
+    sound = mixer.Sound("backgroundsong.wav")
     sound.play()
     
     while menu:
-        button = get_button()
+        button = get_button(sound)
         if button == 0:
             menu = False
             pygame.quit()
