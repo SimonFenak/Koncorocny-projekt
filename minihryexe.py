@@ -1,5 +1,7 @@
 import pygame
+from pygame import mixer
 pygame.init()
+mixer.init()
 
 white = (255, 255, 255)
 black = (0,0,0)
@@ -70,6 +72,8 @@ def main():
     clock = pygame.time.Clock()
     banner = pygame.image.load("background.jpg").convert_alpha()
     background = screen.blit(banner, (0,0))
+    sound = mixer.Sound("zaznam.mp3")
+    sound.play()
     
     while menu:
         button = get_button()
