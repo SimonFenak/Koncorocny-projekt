@@ -10,10 +10,14 @@ SCREEN_HEIGHT = 660
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 def get_button():
-    pong_game = pygame.image.load("pong-navrh.png").convert_alpha()
-    color_game = pygame.image.load("tile.png").convert_alpha()
-    moon_game = pygame.image.load("tile.png").convert_alpha()
-    random_game = pygame.image.load("tile.png").convert_alpha()
+    pong_game = pygame.image.load("pong-logo.png").convert_alpha()
+    pong_game=pygame.transform.scale(pong_game, (200, 200))
+    color_game = pygame.image.load("bludisko-logo.png").convert_alpha()
+    color_game = pygame.transform.scale(color_game, (180,180))
+    moon_game = pygame.image.load("raketkazohonom.png").convert_alpha()
+    moon_game = pygame.transform.scale(moon_game, (200, 200))
+    random_game = pygame.image.load("farebna-logo.png").convert_alpha()
+    random_game = pygame.transform.scale(random_game, (180, 180))
     random2_game = pygame.image.load("tile.png").convert_alpha()
     random3_game = pygame.image.load("tile.png").convert_alpha()
     back_to_menu = pygame.image.load("hlavnemenu.png").convert_alpha()
