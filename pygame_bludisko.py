@@ -1,5 +1,6 @@
 import pygame
 from pygame import mixer
+import time
 def kresli(screen,panak,labyrint):
     screen.fill((0, 0, 0))
     for i in range(len(labyrint)):
@@ -40,42 +41,46 @@ def main():
     koniec = nadpis.render("Koniec!", True, (0, 0, 0))
     while running==True:
         for event in pygame.event.get():
+            pressed = pygame.key.get_pressed()
             if event.type == pygame.QUIT: running = False
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-                if labyrint[panak[1]][panak[0]+1]=="#":sound.play()
-                elif labyrint[panak[1]][panak[0]+1]=="U":
-                    vyhodnotenie=True
-                    zastavene=True
-
-                else: panak[0] += 1
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
-                if labyrint[panak[1]][panak[0] - 1] == "#":
-                    sound.play()
-                elif labyrint[panak[1] + 1][panak[0]] == "U":
-                    Vyhodnotenie=True
-                else:
-                    panak[0] -= 1
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
-                if labyrint[panak[1]-1][panak[0]] == "#":
-                    sound.play()
-                elif labyrint[panak[1] + 1][panak[0]] == "U":
-                    Vyhodnotenie = True
-                else:
-                    panak[1] -= 1
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
-                if labyrint[panak[1]+1][panak[0]] == "#":
-                    sound.play()
-                elif labyrint[panak[1]+1][panak[0]] == "U":
-                    Vyhodnotenie = True
-                else:
-                    panak[1] += 1
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                xpsova, ypsilonova = event.pos
-                if xpsova < 110 and xpsova > 10 and ypsilonova < 110 and ypsilonova > 10:
-                    zastavene = True
-            stlacene = pygame.key.get_pressed()
-            if stlacene[pygame.K_ESCAPE]:
+        if pressed[pygame.K_RIGHT]:
+            if labyrint[panak[1]][panak[0]+1]=="#":sound.play()
+            elif labyrint[panak[1]][panak[0]+1]=="U":
+                vyhodnotenie=True
+                zastavene=True
+            else: panak[0] += 1
+            time.sleep(0.1)
+        if pressed[pygame.K_LEFT]:
+            if labyrint[panak[1]][panak[0] - 1] == "#":
+                sound.play()
+            elif labyrint[panak[1] + 1][panak[0]] == "U":
+                Vyhodnotenie=True
+            else:
+                panak[0] -= 1
+            time.sleep(0.1)
+        if pressed[pygame.K_UP]:
+            if labyrint[panak[1]-1][panak[0]] == "#":
+                sound.play()
+            elif labyrint[panak[1] + 1][panak[0]] == "U":
+                Vyhodnotenie = True
+            else:
+                panak[1] -= 1
+            time.sleep(0.1)
+        if pressed[pygame.K_DOWN]:
+            if labyrint[panak[1]+1][panak[0]] == "#":
+                sound.play()
+            elif labyrint[panak[1]+1][panak[0]] == "U":
+                Vyhodnotenie = True
+            else:
+                panak[1] += 1
+            time.sleep(0.1)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            xpsova, ypsilonova = event.pos
+            if xpsova < 110 and xpsova > 10 and ypsilonova < 110 and ypsilonova > 10:
                 zastavene = True
+        stlacene = pygame.key.get_pressed()
+        if stlacene[pygame.K_ESCAPE]:
+            zastavene = True
         if zastavene == False and vyhodnotenie==False:
             kresli(screen,panak,labyrint)
         elif zastavene==True and vyhodnotenie==False:

@@ -26,7 +26,7 @@ def pong():
     clock = pygame.time.Clock()
     hrac1_body = 0
     hrac2_body = 0
-    sound = mixer.Sound("beep-104060.mp3")
+    sound = mixer.Sound("beep-104060.wav")
     running = True
     choices=[[10,HEIGHT / 2 - 50],[WIDTH - 30, HEIGHT / 2 - 50]]
     vyber=random.randint(0,1)
