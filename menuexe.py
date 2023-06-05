@@ -9,7 +9,6 @@ SCREEN_WIDTH = 840
 SCREEN_HEIGHT = 660
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-
 def get_button():
 
     games_menu = pygame.image.load("minihry1.png").convert_alpha()

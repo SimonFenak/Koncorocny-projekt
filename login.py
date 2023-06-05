@@ -10,12 +10,12 @@ def prihlasenie(username, password, cursor):
         result = cursor.fetchone()
         cursor.close()
         if result:
-            return True
+            return result
         else:
             return False
 # Inicializácia Pygame
 pygame.init()
-
+prmeno=''
 # Definovanie farieb
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -72,6 +72,11 @@ while running:
                     print("Prihlásenie úspešné.")
                     input_text1 = ''
                     input_text2 = ''
+                    prmeno=exists[0]
+                    subor=open("prihl.txt","w")
+                    subor.write(prmeno)
+                    subor.close()
+
                     warningovanie = False
                     continue
                 else:
@@ -92,6 +97,7 @@ while running:
                 elif input_active2:
                     input_text2 += event.unicode
 
+
         elif event.type == MOUSEBUTTONDOWN:
             if input_rect1.collidepoint(event.pos):
                 input_active1 = True
@@ -102,7 +108,9 @@ while running:
             else:
                 input_active1 = False
                 input_active2 = False
-
+            xpsova, ypsilonova = event.pos
+            if xpsova < 324 and xpsova > 170 and ypsilonova < 577 and ypsilonova > 500:
+                import menuexe
     # Vykreslenie pozadia
     window.fill(WHITE)
 

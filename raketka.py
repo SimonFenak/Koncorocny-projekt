@@ -1,6 +1,8 @@
 import random
 import pygame
 import time
+from pygame.locals import *
+import mysql.connector
 GRAVITY=0.04
 SIRKA = 840
 VYSKA = 660
@@ -10,6 +12,7 @@ ACCEL_Y=0.1
 ACCEL_X=0.07
 pocet = 0
 cas = time.time()
+
 def stvorec(x, y):
     return pygame.Rect(int(x) , int(y) , VELKOST, VELKOST)
 
@@ -60,7 +63,11 @@ def volny_pad(pocet,cas):
         caspotom = time.time()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                file = open("subor.txt", "w")
+                file.close()
                 running = False
+
+
             stlacenne = pygame.key.get_pressed()
             if stlacenne[pygame.K_ESCAPE]:
                 zastavene = True
@@ -175,9 +182,33 @@ def volny_pad(pocet,cas):
                             zastavene = False
                 pygame.display.flip()
     if hodnot==True:
+        subor=open("prihl.txt","r")
+        cita=subor.read()
+        meno=cita
+        if len(cita)!=0:
+            # Pripojenie k databáze
+            db = mysql.connector.connect(
+                host="localhost",
+                user="root",
+                password="",
+                database="pythonik"
+            )
+            cursor = db.cursor()
+            query = "SELECT raketka FROM main WHERE meno = %s"
+            values = (meno,)
+            cursor.execute(query, values)
+            result = cursor.fetchone()
+
+            if pocet>int(result[0]):
+                query = "UPDATE main SET raketka = %s WHERE meno = %s"
+                values = (pocet,meno)
+                cursor.execute(query, values)
+            db.commit()
         while totalitnykonec==False:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    file = open("subor.txt", "w")
+                    file.close()
                     totalitnykonec= True
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     xpsova, ypsilonova = event.pos
