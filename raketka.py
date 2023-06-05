@@ -63,7 +63,7 @@ def volny_pad(pocet,cas):
         caspotom = time.time()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                file = open("subor.txt", "w")
+                file = open("prihl.txt", "w")
                 file.close()
                 running = False
 
@@ -157,6 +157,8 @@ def volny_pad(pocet,cas):
             while zastavene == True:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
+                        file = open("prihl.txt", "w")
+                        file.close()
                         running = False
                         zastavene = False
                     stlacene1 = pygame.key.get_pressed()
@@ -207,7 +209,7 @@ def volny_pad(pocet,cas):
         while totalitnykonec==False:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    file = open("subor.txt", "w")
+                    file = open("prihl.txt", "w")
                     file.close()
                     totalitnykonec= True
                 if event.type == pygame.MOUSEBUTTONDOWN:

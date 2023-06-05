@@ -1,6 +1,7 @@
 import random
 import pygame
-
+from pygame.locals import *
+import mysql.connector
 SIRKA = 14
 VYSKA = 11
 
@@ -131,6 +132,9 @@ def hra():
             pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    if event.type == pygame.QUIT:
+                        file = open("prihl.txt", "w")
+                        file.close()
                     running = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     xpsova, ypsilonova = event.pos
@@ -169,6 +173,9 @@ def hra():
                 for event in pygame.event.get():
 
                     if event.type == pygame.QUIT:
+                        if event.type == pygame.QUIT:
+                            file = open("subor.txt", "w")
+                            file.close()
                         running = False
                         zastavene = False
                     if event.type == pygame.MOUSEBUTTONDOWN:
@@ -196,6 +203,9 @@ def hra():
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
+                    if event.type == pygame.QUIT:
+                        file = open("prihl.txt", "w")
+                        file.close()
                     totalitnykonec= True
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     xpsova, ypsilonova = event.pos
@@ -213,6 +223,28 @@ def hra():
             screen.blit(minihrymen, (320, 420))
             screen.blit(ukoncitmen, (320, 490))
             pygame.display.flip()
+            subor = open("prihl.txt", "r")
+            cita = subor.read()
+            meno = cita
+            if len(cita) != 0:
+                # Pripojenie k databáze
+                db = mysql.connector.connect(
+                    host="localhost",
+                    user="root",
+                    password="",
+                    database="pythonik"
+                )
+                cursor = db.cursor()
+                query = "SELECT fareb FROM main WHERE meno = %s"
+                values = (meno,)
+                cursor.execute(query, values)
+                result = cursor.fetchone()
+
+                if int(vyhodnotenie(kroky)) < int(result[0]):
+                    query = "UPDATE main SET fareb = %s WHERE meno = %s"
+                    values = (int(vyhodnotenie(kroky)), meno)
+                    cursor.execute(query, values)
+                db.commit()
 
     clock.tick(60)
     pygame.display.flip()
