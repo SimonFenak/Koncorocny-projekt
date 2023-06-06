@@ -41,8 +41,8 @@ def get_button():
                     import raketka
                     raketka.main()
                 elif random_game_rect.collidepoint(mouse_pos):
-                    import pong
-                    pong.main_pong()   
+                    import farebna_hra
+                    farebna_hra.main()
                 elif random2_game_rect.collidepoint(mouse_pos):
                     import pong
                     pong.main_pong()   
