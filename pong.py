@@ -59,6 +59,9 @@ def pong():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                file = open("prihl.txt", "w")
+                file.write("")
+                file.close()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 xpsova, ypsilonova = event.pos
                 if xpsova < 110 and xpsova > 10 and ypsilonova < 110 and ypsilonova > 10  :
