@@ -158,6 +158,7 @@ def volny_pad(pocet,cas):
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         file = open("prihl.txt", "w")
+                        file.write("")
                         file.close()
                         running = False
                         zastavene = False
@@ -210,6 +211,7 @@ def volny_pad(pocet,cas):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     file = open("prihl.txt", "w")
+                    file.write("")
                     file.close()
                     totalitnykonec= True
                 if event.type == pygame.MOUSEBUTTONDOWN:
