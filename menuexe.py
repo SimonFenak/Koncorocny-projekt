@@ -9,11 +9,16 @@ SCREEN_WIDTH = 840
 SCREEN_HEIGHT = 660
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-def get_button():
+def get_button(prihlaseny):
 
     games_menu = pygame.image.load("minihry1.png").convert_alpha()
     about_menu = pygame.image.load("onas1.png").convert_alpha()
     end_menu = pygame.image.load("ukoncit1.png").convert_alpha()
+    if prihlaseny == True:
+        login_menu = pygame.image.load("prihlaseny.png").convert_alpha()
+    else:
+        login_menu = pygame.image.load("login.png").convert_alpha()
+
 
     while True:
         for event in pygame.event.get():
@@ -25,6 +30,8 @@ def get_button():
                     return "Minihry"
                 elif about_menu_rect.collidepoint(mouse_pos):
                     return "O nás"
+                elif login_menu_rect.collidepoint(mouse_pos):
+                    return "Login"
                 elif end_menu_rect.collidepoint(mouse_pos):
                     return 0
                 else:
@@ -33,6 +40,7 @@ def get_button():
         games_menu_rect = screen.blit(games_menu, (320, 300))
         about_menu_rect = screen.blit(about_menu, (320, 380))
         end_menu_rect = screen.blit(end_menu, (320, 460))
+        login_menu_rect = screen.blit(login_menu, (740,50))
 
         pygame.display.update()
 
@@ -42,6 +50,7 @@ def main_menu():
     clock = pygame.time.Clock()
     banner = pygame.image.load("background.jpg").convert_alpha()
     background = screen.blit(banner, (0,0))
+    log = subor.read(prihl.txt)
     
     while menu:
         button = get_button()
