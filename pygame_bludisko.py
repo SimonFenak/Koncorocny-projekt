@@ -1,6 +1,8 @@
 import pygame
 from pygame import mixer
 import time
+from pygame.locals import *
+import mysql.connector
 def kresli(screen,panak,labyrint):
     screen.fill((0, 0, 0))
     for i in range(len(labyrint)):
@@ -18,7 +20,7 @@ def main():
     f = open("labyrint.txt", "r")
     labyrint = f.read().split("\n")
     running= True
-    cas = pygame.time.Clock()
+    cas =  time.time()
     tlacitko = pygame.image.load("menu-bar.png")
     mensie = pygame.transform.scale(tlacitko, (50, 50))
     zastavene = False
@@ -38,11 +40,15 @@ def main():
     text1 = font.render("Vitajte v hre blusko hra je určená ", True, (255, 0, 0))
     text2 = font.render("pre jedného hráča. Ulohou je aby", True, (255, 0, 0))
     text3 = font.render("sa hráč dostal na koniec bludiska.", True, (255, 0, 0))
-    koniec = nadpis.render("Koniec!", True, (0, 0, 0))
+    koniec = nadpis.render("Koniec!", True, (255, 255, 255))
     while running==True:
         for event in pygame.event.get():
             pressed = pygame.key.get_pressed()
-            if event.type == pygame.QUIT: running = False
+            if event.type == pygame.QUIT:
+                running = False
+                file = open("prihl.txt", "w")
+                file.write("")
+                file.close()
         if pressed[pygame.K_RIGHT]:
             if labyrint[panak[1]][panak[0]+1]=="#":sound.play()
             elif labyrint[panak[1]][panak[0]+1]=="U":
@@ -120,11 +126,38 @@ def main():
                         zastavene = False
 
         else:
+            casik=cas/100000000
+            casik=round(casik,2)
+            subor = open("prihl.txt", "r")
+            cita = subor.read()
+            meno = cita
+            if len(cita) != 0:
+                # Pripojenie k databáze
+                db = mysql.connector.connect(
+                    host="localhost",
+                    user="root",
+                    password="",
+                    database="pythonik"
+                )
+                cursor = db.cursor()
+                query = "SELECT bludisko FROM main WHERE meno = %s"
+                values = (meno,)
+                cursor.execute(query, values)
+                result = cursor.fetchone()
+
+                if casik < int(result[0]) or int(result[0])==0.0:
+                    query = "UPDATE main SET bludisko = %s WHERE meno = %s"
+                    values = (casik, meno)
+                    cursor.execute(query, values)
+                db.commit()
             while totalitnykonec == False:
 
                 for event in pygame.event.get():
 
                     if event.type == pygame.QUIT:
+                        file = open("prihl.txt", "w")
+                        file.write("")
+                        file.close()
                         totalitnykonec = True
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         xpsova, ypsilonova = event.pos
@@ -135,7 +168,7 @@ def main():
                             minihryexe.main()
                         if xpsova < 500 and xpsova > 320 and ypsilonova < 420 and ypsilonova > 360:
                             main()
-                cislo = nadpis.render("Počet tvojich krokov " , True, (0, 0, 0))
+                cislo = nadpis.render("Tvoj čas:"+str(casik) , True, (255, 0, 0))
                 screen.blit(cislo, (230, 300))
                 screen.blit(koniec, (350, 250))
                 screen.blit(startmen, (320, 350))
