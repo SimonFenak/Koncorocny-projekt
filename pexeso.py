@@ -17,8 +17,6 @@ for i in range(1, 16):
     image = pygame.image.load(f"pexesopics\{i}.png")  # Adjust the file name pattern
     card_images.append(image)
 
-
-
 # Cards
 cards = [i // 2 for i in range(len(card_images))] * 2
 random.shuffle(cards)
@@ -26,35 +24,37 @@ revealed = [False for _ in cards]
 matching_pairs = 0
 
 # Card dimensions
-CARD_WIDTH = 100
-CARD_HEIGHT = 150
-GAP = 10
 NUM_COLS = 6
 NUM_ROWS = 5
-GRID_X = (SCREEN_WIDTH - (CARD_WIDTH + GAP) * NUM_COLS) // 2
-GRID_Y = (SCREEN_HEIGHT - (CARD_HEIGHT + GAP) * NUM_ROWS) // 2
+GAP = 10
+
+CARD_WIDTH = (SCREEN_WIDTH - (NUM_COLS + 1) * GAP) // NUM_COLS
+CARD_HEIGHT = (SCREEN_HEIGHT - (NUM_ROWS + 1) * GAP) // NUM_ROWS
 
 # Create cards
 cards_rects = []
 for row in range(NUM_ROWS):
     for col in range(NUM_COLS):
-        x = GRID_X + col * (CARD_WIDTH + GAP)
-        y = GRID_Y + row * (CARD_HEIGHT + GAP)
+        x = GAP + col * (CARD_WIDTH + GAP)
+        y = GAP + row * (CARD_HEIGHT + GAP)
         rect = pygame.Rect(x, y, CARD_WIDTH, CARD_HEIGHT)
         cards_rects.append(rect)
 
+
+selected_cards = []
+
 def check_matching_cards():
-    global selected_card, matching_pairs
-    matching = [i for i, rev in enumerate(revealed) if rev]
-    if len(matching) == 2:
-        if cards[matching[0]] == cards[matching[1]]:
+    global selected_cards, matching_pairs
+    if len(selected_cards) == 2:
+        card1, card2 = selected_cards
+        if cards[card1] == cards[card2]:
             matching_pairs += 1
             if matching_pairs == len(cards) // 2:
                 print("You won!")
         else:
-            revealed[matching[0]] = False
-            revealed[matching[1]] = False
-        selected_card = None
+            for i in selected_cards:
+                revealed[i] = False
+        selected_cards.clear()
 
 def draw_cards():
     for i, rect in enumerate(cards_rects):
@@ -62,7 +62,7 @@ def draw_cards():
             pygame.draw.rect(screen, white, rect)
             pygame.draw.rect(screen, black, rect, 2)
             image = card_images[cards[i]]
-            resized_image = pygame.transform.scale(image, (CARD_WIDTH // 1.5, CARD_HEIGHT // 1.5))
+            resized_image = pygame.transform.scale(image, (CARD_WIDTH - 2 * GAP, CARD_HEIGHT - 2 * GAP))
             image_rect = resized_image.get_rect(center=rect.center)
             screen.blit(resized_image, image_rect)
         else:
@@ -71,7 +71,6 @@ def draw_cards():
 def main():
     clock = pygame.time.Clock()
     running = True
-    selected_card = None
 
     while running:
         for event in pygame.event.get():
@@ -83,9 +82,8 @@ def main():
                     for i, rect in enumerate(cards_rects):
                         if rect.collidepoint(pos) and not revealed[i]:
                             revealed[i] = True
-                            if selected_card is None:
-                                selected_card = i
-                            else:
+                            selected_cards.append(i)
+                            if len(selected_cards) == 2:
                                 check_matching_cards()
 
         screen.fill(white)
