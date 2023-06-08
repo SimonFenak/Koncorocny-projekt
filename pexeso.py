@@ -22,8 +22,7 @@ for i in range(1, 16):
 # Cards
 cards = [i // 2 for i in range(len(card_images))] * 2
 random.shuffle(cards)
-revealed = [False] * len(cards)
-selected_card = None
+revealed = [False for _ in cards]
 matching_pairs = 0
 
 # Card dimensions
@@ -63,14 +62,16 @@ def draw_cards():
             pygame.draw.rect(screen, white, rect)
             pygame.draw.rect(screen, black, rect, 2)
             image = card_images[cards[i]]
-            image_rect = image.get_rect(center=rect.center)
-            screen.blit(image, image_rect)
+            resized_image = pygame.transform.scale(image, (CARD_WIDTH // 1.5, CARD_HEIGHT // 1.5))
+            image_rect = resized_image.get_rect(center=rect.center)
+            screen.blit(resized_image, image_rect)
         else:
             pygame.draw.rect(screen, black, rect)
 
 def main():
     clock = pygame.time.Clock()
     running = True
+    selected_card = None
 
     while running:
         for event in pygame.event.get():
