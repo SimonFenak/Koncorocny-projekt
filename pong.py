@@ -5,7 +5,7 @@ mixer.init()
 WIDTH = 850
 HEIGHT = 660
 BALL_SIZE = 20
-BALL_SPEED = 4
+BALL_SPEED = 8
 
 
 def stvorec(x, y):
@@ -74,16 +74,16 @@ def pong():
             pressed = pygame.key.get_pressed()
             if ploska1_y > 0:
                 if pressed[pygame.K_w]:
-                    ploska1_y -= 4
+                    ploska1_y -= 10
             if ploska1_y < (HEIGHT - 100):
                 if pressed[pygame.K_s]:
-                    ploska1_y += 4
+                    ploska1_y += 10
             if ploska2_y > 0:
                 if pressed[pygame.K_UP]:
-                    ploska2_y -= 4
+                    ploska2_y -= 10
             if ploska2_y < (HEIGHT - 100):
                 if pressed[pygame.K_DOWN]:
-                    ploska2_y += 4
+                    ploska2_y += 10
 
 
             if ball_x < 0:
