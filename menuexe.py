@@ -23,6 +23,9 @@ def get_button(prihlaseny):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                file = open("prihl.txt", "w")
+                file.write("")
+                file.close()
                 return 0
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()

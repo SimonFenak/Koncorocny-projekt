@@ -78,6 +78,7 @@ while running:
                     subor.close()
 
                     warningovanie = False
+                    import menuexe
                     continue
                 else:
                     print("Nesprávne prihlasovacie údaje.")
