@@ -14,8 +14,12 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # Load images
 card_images = []
 for i in range(1, 16):
-    image = pygame.image.load(f"pexesopics\{i}.png")  # Adjust the file name pattern
+    image = pygame.image.load(f"pexesopics/{i}.png")  # Adjust the file name pattern
     card_images.append(image)
+
+# Load background image
+background_image = pygame.image.load("pexesobackground.png")
+background_image = pygame.transform.scale(background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Cards
 cards = random.sample(range(1, len(card_images) + 1), len(card_images)) * 2
@@ -26,7 +30,7 @@ matching_pairs = 0
 # Card dimensions
 NUM_COLS = 6
 NUM_ROWS = 5
-GAP = 10
+GAP = 20
 
 CARD_WIDTH = (SCREEN_WIDTH - (NUM_COLS + 1) * GAP) // NUM_COLS
 CARD_HEIGHT = (SCREEN_HEIGHT - (NUM_ROWS + 1) * GAP) // NUM_ROWS
@@ -39,7 +43,6 @@ for row in range(NUM_ROWS):
         y = GAP + row * (CARD_HEIGHT + GAP)
         rect = pygame.Rect(x, y, CARD_WIDTH, CARD_HEIGHT)
         cards_rects.append(rect)
-
 
 selected_cards = []
 
@@ -86,7 +89,7 @@ def main():
                             if len(selected_cards) == 2:
                                 check_matching_cards()
 
-        screen.fill(white)
+        screen.blit(background_image, (0, 0))
         draw_cards()
         pygame.display.flip()
         clock.tick(60)
