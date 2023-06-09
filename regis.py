@@ -85,8 +85,8 @@ while running:
                 overenie=False
                 # Vloženie informácií do databázy
                 warningovanie = False
-                query = "INSERT INTO main (meno, heslo) VALUES (%s, %s)"
-                values = (input_text1, input_text2)
+                query = "INSERT INTO main (meno, heslo,bludisko,fareb) VALUES (%s, %s,%s,%s)"
+                values = (input_text1, input_text2,100.0,50)
                 cursor.execute(query, values)
                 db.commit()
                 uspech=True
