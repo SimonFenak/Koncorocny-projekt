@@ -18,7 +18,7 @@ for i in range(1, 16):
     card_images.append(image)
 
 # Cards
-cards = [i // 2 for i in range(len(card_images))] * 2
+cards = random.sample(range(1, len(card_images) + 1), len(card_images)) * 2
 random.shuffle(cards)
 revealed = [False for _ in cards]
 matching_pairs = 0
@@ -61,7 +61,7 @@ def draw_cards():
         if revealed[i]:
             pygame.draw.rect(screen, white, rect)
             pygame.draw.rect(screen, black, rect, 2)
-            image = card_images[cards[i]]
+            image = card_images[cards[i] - 1]
             resized_image = pygame.transform.scale(image, (CARD_WIDTH - 2 * GAP, CARD_HEIGHT - 2 * GAP))
             image_rect = resized_image.get_rect(center=rect.center)
             screen.blit(resized_image, image_rect)
