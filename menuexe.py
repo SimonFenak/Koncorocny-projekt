@@ -16,7 +16,7 @@ def get_button(prihlaseny):
     end_menu = pygame.image.load("ukoncit1.png").convert_alpha()
     if prihlaseny == True:
         login_menu = pygame.image.load("prihlaseny.png").convert_alpha()
-    else:
+    elif prihlaseny == False:
         login_menu = pygame.image.load("login.png").convert_alpha()
 
 
@@ -47,13 +47,18 @@ def get_button(prihlaseny):
 
 def main_menu():
     menu = True
+    prihlaseny = False
     clock = pygame.time.Clock()
     banner = pygame.image.load("background.jpg").convert_alpha()
     background = screen.blit(banner, (0,0))
-    log = subor.read(prihl.txt)
+    subor = open("prihl.txt")
+    log = subor.read()
+    print(len(log))
+    if len(log)!=0:
+        prihlaseny = True
     
     while menu:
-        button = get_button()
+        button = get_button(prihlaseny)
         if button == 0:
             menu = False
             pygame.quit()
@@ -62,6 +67,10 @@ def main_menu():
             import minihryexe
             minihryexe.main()
             pygame.quit()
+        elif button == "Login" and prihlaseny==False:
+            import login
+        elif button == "Login" and prihlaseny==True:
+            print("už si prihlásený")
         print(button)
         pygame.display.flip()
         clock.tick(60)
