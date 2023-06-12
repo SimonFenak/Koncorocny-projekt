@@ -26,8 +26,8 @@ cursor.fetchall()
 raketprv=raketkares[0]
 raketdru=raketkares[1]
 rakettre=raketkares[2]
-
-query = "SELECT meno,bludisko  FROM secondORDER BY bludisko DESC"
+specifont="Press_Start_2P/PressStart2P-Regular.ttf"
+query = "SELECT meno,bludisko  FROM second ORDER BY bludisko DESC"
 cursor.execute(query)
 bludiskores = cursor.fetchmany(3)
 cursor.fetchall()
@@ -69,7 +69,7 @@ def main_menu():
     clock = pygame.time.Clock()
     banner = pygame.image.load("background.jpg").convert_alpha()
     tabulka=pygame.image.load("table.png").convert_alpha()
-    nadpis = pygame.font.Font(None, 50)
+    nadpis = pygame.font.Font(specifont, 20)
     raketka =nadpis.render("Raketka", True, (255, 255, 255))
     bludisko = nadpis.render("Bludisko", True, (255, 255, 255))
     fareb= nadpis.render("Štvorce", True, (255, 255, 255))
@@ -103,6 +103,12 @@ def main_menu():
     clock.tick(60)
 
     while menu:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                file = open("prihl.txt", "w")
+                file.write("")
+                file.close()
+                menu=False
         button = get_button(prihlaseny)
         if button==0:
             menu=False

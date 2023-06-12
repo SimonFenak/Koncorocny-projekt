@@ -36,8 +36,9 @@ def get_button():
                     import pong
                     pong.main_pong()
                 elif color_game_rect.collidepoint(mouse_pos):
+                    pygame.time.wait(500)
                     import pygame_bludisko
-                    farebna_hra.main()
+                    pygame_bludisko.main()
                 elif moon_game_rect.collidepoint(mouse_pos):
                     import raketka
                     raketka.main()
@@ -46,19 +47,17 @@ def get_button():
                     farebna_hra.main()
                 elif random2_game_rect.collidepoint(mouse_pos):
                     import pexeso
-
-                    pong.main_pong()   
-
                     pexeso.main()
 
                 elif random3_game_rect.collidepoint(mouse_pos):
-                    import pong
-                    pong.main_pong() 
+                    import tabulka
+                    tabulka.main_menu()
+
                 elif back_to_menu_rect.collidepoint(mouse_pos):
                     import menuexe
                     menuexe.main_menu()
                 elif end_menu_rect.collidepoint(mouse_pos):
-                    return 0         
+                    return 0
         pong_game_rect = screen.blit(pong_game, (50, 50))
         color_game_rect = screen.blit(color_game, (300, 50))
         moon_game_rect = screen.blit(moon_game, (550, 50))
