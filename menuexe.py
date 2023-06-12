@@ -73,6 +73,7 @@ def main_menu():
             pygame.quit()
         elif button == "Login" and prihlaseny==False:
             import login
+            login.main()
         elif button == "Login" and prihlaseny==True:
             print("už si prihlásený")
         print(button)
