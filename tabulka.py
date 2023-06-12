@@ -22,6 +22,7 @@ cursor = db.cursor()
 query = "SELECT meno, raketka FROM second ORDER BY raketka DESC LIMIT 3"
 cursor.execute(query)
 raketkares = cursor.fetchmany(3)
+cursor.fetchall()
 raketprv=raketkares[0]
 raketdru=raketkares[1]
 rakettre=raketkares[2]
@@ -32,6 +33,8 @@ bludiskores = cursor.fetchmany(3)
 bludisprv=bludiskores[0]
 bludisdru=bludiskores[1]
 bludistre=bludiskores[2]
+cursor.fetchall()
+
 
 query = "SELECT meno,fareb FROM second ORDER BY fareb "
 cursor.execute(query)
@@ -110,6 +113,10 @@ def main_menu():
         if button==0:
             pygame.quit()
             menu=False
+        if button == "Minihry":
+            import minihryexe
+            minihryexe.main()
+            pygame.quit()
         print(button)
         pygame.display.flip()
         clock.tick(60)

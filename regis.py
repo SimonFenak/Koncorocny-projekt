@@ -73,7 +73,7 @@ def main():
     over=f_nick.render("Prihlasovacie meno už existuje.", True, (255, 255, 255))
     uspes_text=f_nick.render("Úspešne si sa registroval", True, (255, 255, 255))
     while running:
-        back_to_menu_rect = window.blit(back_to_menu, (170, 500))
+        back_to_menu_rect = window.blit(back_to_menu, (350, 500))
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
@@ -83,6 +83,7 @@ def main():
                 if back_to_menu_rect.collidepoint(mouse_pos):
                     import menuexe
                     menuexe.main_menu()
+                    pygame.quit()
                 if event.key == K_RETURN:
                     if  input_text1 == '' or input_text2 == '':
                         warningovanie=True
@@ -119,7 +120,6 @@ def main():
                         input_text1 += event.unicode
                     elif input_active2:
                         input_text2 += event.unicode
-
             elif event.type == MOUSEBUTTONDOWN:
                 if input_rect1.collidepoint(event.pos):
                     input_active1 = True
@@ -131,7 +131,7 @@ def main():
                     input_active1 = False
                     input_active2 = False
                 xpsova, ypsilonova = event.pos
-                if xpsova < 324 and xpsova > 170 and ypsilonova < 577 and ypsilonova > 500:
+                if xpsova < 504 and xpsova > 350 and ypsilonova < 577 and ypsilonova > 500:
                     import menuexe
                     menuexe.main_menu()
 
@@ -147,7 +147,7 @@ def main():
         window.blit(nadpis, (270, 200))
         window.blit(nick, (200, 310))
         window.blit(heslo, (200, 390))
-        back_to_menu_rect = window.blit(back_to_menu, (170, 500))
+        back_to_menu_rect = window.blit(back_to_menu, (350, 500))
         if warningovanie==True:
             window.blit(warning, (260, 260))
         if overenie == True:

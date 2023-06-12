@@ -66,7 +66,7 @@ def main():
 
     while running:
         back_to_menu_rect = window.blit(back_to_menu, (170, 500))
-        to_register_menu_rect = window.blit(to_register_menu, (400,500))
+        to_register_menu_rect = window.blit(to_register_menu, (470,500))
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -128,8 +128,10 @@ def main():
                 if xpsova < 324 and xpsova > 170 and ypsilonova < 577 and ypsilonova > 500:
                     import menuexe
                     menuexe.main_menu()
-                if xpsova < 654 and xpsova > 400 and ypsilonova < 577 and ypsilonova > 500:
+                if xpsova < 654 and xpsova > 470 and ypsilonova < 647 and ypsilonova > 500:
                     import regis
+                    regis.main()
+                    pygame.quit()
 
         # Vykreslenie pozadia
         window.fill(WHITE)
@@ -143,7 +145,7 @@ def main():
         window.blit(nick, (200, 310))
         window.blit(heslo, (200, 390))
         back_to_menu_rect = window.blit(back_to_menu, (170, 500))
-        to_register_menu_rect = window.blit(to_register_menu, (400,500))
+        to_register_menu_rect = window.blit(to_register_menu, (470,500))
 
         if warningovanie:
             window.blit(warning, (260, 260))
