@@ -14,7 +14,7 @@ def hash_password(password):
     hashed_password = hash_object.hexdigest()
     return hashed_password
 
-def check_username(username, hashed_password, cursor):
+def check_username(username, hashed_password, cursor, db):
     cursor = db.cursor()
     if db is not None:
         query = "SELECT * FROM second WHERE meno = %s"
@@ -83,6 +83,7 @@ def main():
                 mouse_pos = pygame.mouse.get_pos()
                 if back_to_menu_rect.collidepoint(mouse_pos):
                     import menuexe
+                    menuexe.main_menu()
                 if event.key == K_RETURN:
                     if  input_text1 == '' or input_text2 == '':
                         warningovanie=True
@@ -92,7 +93,7 @@ def main():
                     username = input_text1
                     password = input_text2
                     hashed_password = hash_password(password)
-                    exists = check_username(username, hashed_password, cursor)
+                    exists = check_username(username, hashed_password, cursor, db)
                     if exists:
                         overenie=True
                         warningovanie = False
@@ -130,6 +131,10 @@ def main():
                 else:
                     input_active1 = False
                     input_active2 = False
+                xpsova, ypsilonova = event.pos
+                if xpsova < 324 and xpsova > 170 and ypsilonova < 577 and ypsilonova > 500:
+                    import menuexe
+                    menuexe.main_menu()
 
         # Vykreslenie pozadia
         window.fill(WHITE)
