@@ -20,7 +20,8 @@ def get_button():
     moon_game = pygame.transform.scale(moon_game, (200, 200))
     random_game = pygame.image.load("farebna-logo.png").convert_alpha()
     random_game = pygame.transform.scale(random_game, (180, 180))
-    random2_game = pygame.image.load("tile.png").convert_alpha()
+    random2_game = pygame.image.load("My project.png").convert_alpha()
+    random2_game = pygame.transform.scale(random2_game, (180, 180))
     random3_game = pygame.image.load("tile.png").convert_alpha()
     back_to_menu = pygame.image.load("hlavnemenu.png").convert_alpha()
     end_menu = pygame.image.load("ukoncit1.png").convert_alpha()
@@ -44,8 +45,8 @@ def get_button():
                     import farebna_hra
                     farebna_hra.main()
                 elif random2_game_rect.collidepoint(mouse_pos):
-                    import pong
-                    pong.main_pong()   
+                    import pexeso
+                    pexeso.main()
                 elif random3_game_rect.collidepoint(mouse_pos):
                     import pong
                     pong.main_pong() 
