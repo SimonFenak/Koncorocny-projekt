@@ -198,13 +198,13 @@ def volny_pad(pocet,cas):
                 database="pythonik"
             )
             cursor = db.cursor()
-            query = "SELECT raketka FROM main WHERE meno = %s"
+            query = "SELECT raketka FROM second WHERE meno = %s"
             values = (meno,)
             cursor.execute(query, values)
             result = cursor.fetchone()
 
             if pocet>int(result[0]):
-                query = "UPDATE main SET raketka = %s WHERE meno = %s"
+                query = "UPDATE second SET raketka = %s WHERE meno = %s"
                 values = (pocet,meno)
                 cursor.execute(query, values)
             db.commit()
