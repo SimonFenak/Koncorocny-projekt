@@ -15,7 +15,7 @@ def main():
     panak = [1,1]
     mixer.init()
     pygame.init()
-    sound = mixer.Sound("ough-47202.mp3")
+    sound = mixer.Sound("ough-47202.wav")
     screen = pygame.display.set_mode((840, 660))
     f = open("labyrint.txt", "r")
     labyrint = f.read().split("\n")

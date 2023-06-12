@@ -98,6 +98,7 @@ def main():
                         warningovanie = False
                         import menuexe
                         menuexe.main_menu()
+                        pygame.quit()
                         continue
                     else:
                         print("Nesprávne prihlasovacie údaje.")
