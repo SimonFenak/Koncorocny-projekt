@@ -36,6 +36,7 @@ def get_button():
                     import pong
                     pong.main_pong()
                 elif color_game_rect.collidepoint(mouse_pos):
+                    pygame.time.wait(500)
                     import pygame_bludisko
                     pygame_bludisko.main()
                 elif moon_game_rect.collidepoint(mouse_pos):

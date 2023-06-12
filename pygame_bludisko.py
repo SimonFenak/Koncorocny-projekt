@@ -42,6 +42,7 @@ def main():
     text3 = font.render("sa hráč dostal na koniec bludiska.", True, (255, 0, 0))
     koniec = nadpis.render("Koniec!", True, (255, 255, 255))
     while running==True:
+        cas = time.time()
         for event in pygame.event.get():
             pressed = pygame.key.get_pressed()
             if event.type == pygame.QUIT:
