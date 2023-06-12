@@ -46,7 +46,11 @@ def get_button():
                     farebna_hra.main()
                 elif random2_game_rect.collidepoint(mouse_pos):
                     import pexeso
+
                     pong.main_pong()   
+
+                    pexeso.main()
+
                 elif random3_game_rect.collidepoint(mouse_pos):
                     import pong
                     pong.main_pong() 
