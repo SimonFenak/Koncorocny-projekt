@@ -12,7 +12,7 @@ def hash_password(password):
 
 def prihlasenie(username, password, cursor):
     if db is not None:
-        query = "SELECT * FROM main WHERE meno = %s AND heslo = %s"#tu najdi chybu toto treba zmeniť bujaku heslo =...
+        query = "SELECT * FROM second WHERE meno = %s AND heslo = %s"#tu najdi chybu toto treba zmeniť bujaku heslo =...
         cursor.execute(query, (username, password))
         result = cursor.fetchone()
         if result:

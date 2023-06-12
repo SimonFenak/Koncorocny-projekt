@@ -17,7 +17,7 @@ def hash_password(password):
 def check_username(username, hashed_password, cursor):
     cursor = db.cursor()
     if db is not None:
-        query = "SELECT * FROM main WHERE meno = %s"
+        query = "SELECT * FROM second WHERE meno = %s"
         cursor.execute(query, (username,))
         result = cursor.fetchone()
         result = cursor.fetchall()
@@ -99,7 +99,7 @@ while running:
                 overenie=False
                 # Vloženie informácií do databázy
                 warningovanie = False
-                query = "INSERT INTO main (meno, heslo, bludisko, fareb) VALUES (%s, %s, %s, %s)"
+                query = "INSERT INTO second (meno, heslo, bludisko, fareb) VALUES (%s, %s, %s, %s)"
                 values = (input_text1, hashed_password, 100.0, 50)
                 cursor.execute(query, values)
                 db.commit()

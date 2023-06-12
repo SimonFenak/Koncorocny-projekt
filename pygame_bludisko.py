@@ -140,13 +140,13 @@ def main():
                     database="pythonik"
                 )
                 cursor = db.cursor()
-                query = "SELECT bludisko FROM main WHERE meno = %s"
+                query = "SELECT bludisko FROM second WHERE meno = %s"
                 values = (meno,)
                 cursor.execute(query, values)
                 result = cursor.fetchone()
 
                 if casik < int(result[0]) or int(result[0])==0.0:
-                    query = "UPDATE main SET bludisko = %s WHERE meno = %s"
+                    query = "UPDATE second SET bludisko = %s WHERE meno = %s"
                     values = (casik, meno)
                     cursor.execute(query, values)
                 db.commit()
