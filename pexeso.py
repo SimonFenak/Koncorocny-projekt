@@ -14,7 +14,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # Load images
 card_images = []
 for i in range(1, 16):
-    image = pygame.image.load(f"pexesopics/{i}.png")  # Adjust the file name pattern
+    image = pygame.image.load(f"pexesopics\{i}.png")  # Adjust the file name pattern
     card_images.append(image)
 
 # Load background image

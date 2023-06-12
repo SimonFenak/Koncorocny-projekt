@@ -62,6 +62,7 @@ def main_menu():
     
     while menu:
         button = get_button(prihlaseny)
+        print(button)
         if button == 0:
             menu = False
             pygame.quit()

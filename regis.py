@@ -1,8 +1,20 @@
 import pygame
 from pygame.locals import *
 import mysql.connector
+import hashlib
 
-def check_username(username,heslo,cursor):
+def hash_password(password):
+    # Vytvorenie objektu pre hashovanie
+    hash_object = hashlib.sha256()
+    # Konverzia hesla na bajty
+    password_bytes = password.encode('utf-8')
+    # Aktualizácia objektu hashu s heslom
+    hash_object.update(password_bytes)
+    # Získanie zahashovaného reťazca
+    hashed_password = hash_object.hexdigest()
+    return hashed_password
+
+def check_username(username, hashed_password, cursor):
     cursor = db.cursor()
     if db is not None:
         query = "SELECT * FROM main WHERE meno = %s"
@@ -17,6 +29,7 @@ def check_username(username,heslo,cursor):
     else:
         print("Chyba: Nie je pripojené k databáze.")
         return False
+
 # Inicializácia Pygame
 pygame.init()
 
@@ -75,8 +88,9 @@ while running:
                     continue
                 #Overenie mena
                 username = input_text1
-                heslo = input_text2
-                exists = check_username(username,heslo,cursor)
+                password = input_text2
+                hashed_password = hash_password(password)
+                exists = check_username(username, hashed_password, cursor)
                 if exists:
                     overenie=True
                     warningovanie = False
@@ -85,8 +99,8 @@ while running:
                 overenie=False
                 # Vloženie informácií do databázy
                 warningovanie = False
-                query = "INSERT INTO main (meno, heslo,bludisko,fareb) VALUES (%s, %s,%s,%s)"
-                values = (input_text1, input_text2,100.0,50)
+                query = "INSERT INTO main (meno, heslo, bludisko, fareb) VALUES (%s, %s, %s, %s)"
+                values = (input_text1, hashed_password, 100.0, 50)
                 cursor.execute(query, values)
                 db.commit()
                 uspech=True
@@ -143,12 +157,9 @@ while running:
     text_surface1 = font.render(input_text1, True, (255,255,255))
     text_surface2 = font.render(input_text2, True, (255,255,255))
 
-
-
     window.blit(text_surface1, (input_rect1.x + 5, input_rect1.y + 5))
     window.blit(text_surface2, (input_rect2.x + 5, input_rect2.y + 5))
     pygame.display.update()
-
 
 # Uzavretie spojenia s databázou
 cursor.close()

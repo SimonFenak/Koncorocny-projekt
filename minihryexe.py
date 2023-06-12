@@ -36,7 +36,7 @@ def get_button():
                     import pong
                     pong.main_pong()
                 elif color_game_rect.collidepoint(mouse_pos):
-                    import farebna_hra
+                    import pygame_bludisko
                     farebna_hra.main()
                 elif moon_game_rect.collidepoint(mouse_pos):
                     import raketka
@@ -45,7 +45,7 @@ def get_button():
                     import farebna_hra
                     farebna_hra.main()
                 elif random2_game_rect.collidepoint(mouse_pos):
-                    import pong
+                    import pexeso
                     pong.main_pong()   
                 elif random3_game_rect.collidepoint(mouse_pos):
                     import pong
