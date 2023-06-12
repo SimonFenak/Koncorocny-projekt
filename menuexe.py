@@ -74,6 +74,9 @@ def main_menu():
             import login
         elif button == "Login" and prihlaseny==True:
             print("už si prihlásený")
+        elif button == "O nás":
+            import o_nas
+            o_nas.main()
         print(button)
         pygame.display.flip()
         clock.tick(60)
