@@ -1,50 +1,15 @@
 import pygame
 from pygame.locals import *
 import mysql.connector
-import hashlib
-
-
-def hash_password(password):
-    # Hash hesla pomocou SHA-256
-    hashed_password = hashlib.sha256(password.encode()).hexdigest()
-    return hashed_password
-
-
-def prihlasenie(username, password, cursor):
-    if db is not None:
-        query = "SELECT * FROM second WHERE meno = %s AND heslo = %s"#tu najdi chybu toto treba zmeniť bujaku heslo =...
-        cursor.execute(query, (username, password))
-        result = cursor.fetchone()
-        if result:
-            return result
-        else:
-            return False
-
-
-# Inicializácia Pygame
 pygame.init()
-prmeno = ''
 
-# Definovanie farieb
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
+white = (255, 255, 255)
+black = (0, 0, 0)
 
-# Vytvorenie okna
-window_width, window_height = 840, 660
-window = pygame.display.set_mode((window_width, window_height))
-pygame.display.set_caption('Formulár')
-
-back_to_menu = pygame.image.load("hlavnemenu.png").convert_alpha()
-
-# Vytvorenie textových políčok
-input_rect1 = pygame.Rect(320, 300, 230, 50)
-input_active1 = False
-input_text1 = ''
-
-input_rect2 = pygame.Rect(320, 380, 230, 50)
-input_active2 = False
-input_text2 = ''
-
+# SCREEN
+SCREEN_WIDTH = 840
+SCREEN_HEIGHT = 660
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # Pripojenie k databáze
 db = mysql.connector.connect(
     host="localhost",
@@ -53,103 +18,102 @@ db = mysql.connector.connect(
     database="pythonik"
 )
 cursor = db.cursor()
-banner = pygame.image.load("background.jpg").convert_alpha()
 
-# Hlavná slučka hry
-running = True
-warningovanie = False
-font_nadpis = pygame.font.Font(None, 72)
-f_nick = pygame.font.Font(None, 45)
-warning = f_nick.render("Zlé prihlasovacie údaje!", True, (255, 255, 255))
+query = "SELECT meno, raketka FROM second ORDER BY raketka DESC LIMIT 3"
+cursor.execute(query)
+raketkares = cursor.fetchmany(3)
+cursor.fetchall()
+raketprv=raketkares[0]
+raketdru=raketkares[1]
+rakettre=raketkares[2]
+specifont="Press_Start_2P/PressStart2P-Regular.ttf"
+query = "SELECT meno,bludisko  FROM second ORDER BY bludisko DESC"
+cursor.execute(query)
+bludiskores = cursor.fetchmany(3)
+cursor.fetchall()
+bludisprv=bludiskores[0]
+bludisdru=bludiskores[1]
+bludistre=bludiskores[2]
 
-while running:
-    back_to_menu_rect = window.blit(back_to_menu, (170, 500))
+query = "SELECT meno,fareb FROM second ORDER BY fareb "
+cursor.execute(query)
+farebres = cursor.fetchmany(3)
+cursor.fetchall()
+farebprv=farebres[0]
+farebdru=farebres[1]
+farebtre=farebres[2]
+def get_button(prihlaseny):
+    games_menu = pygame.image.load("minihry1.png").convert_alpha()
 
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            running = False
-        elif event.type == KEYDOWN:
-            mouse_pos = pygame.mouse.get_pos()
-            if back_to_menu_rect.collidepoint(mouse_pos):
-                import menuexe
-            if event.key == K_RETURN:
-                if input_text1 == '' or input_text2 == '':
-                    warningovanie = True
-                    continue
-                # Overenie mena a hesla
-                username = input_text1
-                password = input_text2
-                hashed_password = hash_password(password)
-                exists = prihlasenie(username, hashed_password, cursor)
-                if exists:
-                    print("Prihlásenie úspešné.")
-                    input_text1 = ''
-                    input_text2 = ''
-                    prmeno = exists[0]
-                    subor = open("prihl.txt", "w")
-                    subor.write(prmeno)
-                    subor.close()
-                    warningovanie = False
-                    import menuexe
-
-                    continue
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                file = open("prihl.txt", "w")
+                file.write("")
+                file.close()
+                return 0
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                if games_menu_rect.collidepoint(mouse_pos):
+                    return "Minihry"
                 else:
-                    print("Nesprávne prihlasovacie údaje.")
-                    input_text2 = ''
-                    continue
-            elif event.key == K_BACKSPACE:
-                if input_active1:
-                    input_text1 = input_text1[:-1]
-                elif input_active2:
-                    input_text2 = input_text2[:-1]
-            else:
-                if input_active1:
-                    input_text1 += event.unicode
-                elif input_active2:
-                    input_text2 += event.unicode
-        elif event.type == MOUSEBUTTONDOWN:
-            if input_rect1.collidepoint(event.pos):
-                input_active1 = True
-                input_active2 = False
-            elif input_rect2.collidepoint(event.pos):
-                input_active1 = False
-                input_active2 = True
-            else:
-                input_active1 = False
-                input_active2 = False
-            xpsova, ypsilonova = event.pos
-            if xpsova < 324 and xpsova > 170 and ypsilonova < 577 and ypsilonova > 500:
-                import menuexe
+                    break
 
-    # Vykreslenie pozadia
-    window.fill(WHITE)
+        games_menu_rect = screen.blit(games_menu, (50, 550))
+        pygame.display.update()
 
-    # Vykreslenie textových políčok
-    background = window.blit(banner, (0, 0))
-    nadpis = font_nadpis.render("Prihlásenie", True, (255, 255, 255))
-    nick = f_nick.render("Nick:", True, (255, 255, 255))
-    heslo = f_nick.render("Heslo:", True, (255, 255, 255))
-    window.blit(nadpis, (290, 200))
-    window.blit(nick, (200, 310))
-    window.blit(heslo, (200, 390))
-    back_to_menu_rect = window.blit(back_to_menu, (170, 500))
 
-    if warningovanie:
-        window.blit(warning, (260, 260))
+def main_menu():
+    menu = True
+    prihlaseny = False
+    clock = pygame.time.Clock()
+    banner = pygame.image.load("background.jpg").convert_alpha()
+    tabulka=pygame.image.load("table.png").convert_alpha()
+    nadpis = pygame.font.Font(specifont, 20)
+    raketka =nadpis.render("Raketka", True, (255, 255, 255))
+    bludisko = nadpis.render("Bludisko", True, (255, 255, 255))
+    fareb= nadpis.render("Štvorce", True, (255, 255, 255))
+    raketv1=nadpis.render(str(raketprv).strip('('')'','),True,(255,255,255))
+    raketv2 = nadpis.render(str(raketdru).strip('('')'','), True, (255, 255, 255))
+    raketv3 = nadpis.render(str(rakettre).strip('('')'','), True, (255, 255, 255))
+    bludv1 = nadpis.render(str(bludisprv).strip('('')'','),True,(255,255,255))
+    bludv2 = nadpis.render(str(bludisdru).strip('('')'','), True, (255, 255, 255))
+    bludv3 = nadpis.render(str(bludistre).strip('('')'','), True, (255, 255, 255))
+    farebv1 = nadpis.render(str(farebprv).strip('('')'','), True, (255, 255, 255))
+    farebv2 = nadpis.render(str(farebdru).strip('('')'','), True, (255, 255, 255))
+    farebv3 = nadpis.render(str(farebtre).strip('('')'','), True, (255, 255, 255))
+    tabulkaupr = pygame.transform.scale(tabulka, (300, 280))
+    background = screen.blit(banner, (0, 0))
+    screen.blit(tabulkaupr,(80,70))
+    screen.blit(raketv1,(100,165))
+    screen.blit(raketv2, (100, 235))
+    screen.blit(raketv3, (100, 285))
+    screen.blit(farebv1, (480, 165))
+    screen.blit(farebv2, (480, 235))
+    screen.blit(farebv3, (480,285 ))
+    screen.blit(bludv1, (290, 400))
+    screen.blit(bludv2, (290, 460))
+    screen.blit(bludv3, (290, 520))
+    screen.blit(tabulkaupr, (460, 70))
+    screen.blit(tabulkaupr, (270, 300))
+    screen.blit(raketka,(160,30))
+    screen.blit(fareb, (540, 30))
+    screen.blit(bludisko, (350, 580))
+    pygame.display.flip()
+    clock.tick(60)
 
-    pygame.draw.rect(window, (255, 255, 255), input_rect1, 2)
-    pygame.draw.rect(window, (255, 255, 255), input_rect2, 2)
+    while menu:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                file = open("prihl.txt", "w")
+                file.write("")
+                file.close()
+                menu=False
+        button = get_button(prihlaseny)
+        if button==0:
+            menu=False
+        print(button)
+        pygame.display.flip()
+        clock.tick(60)
 
-    font = pygame.font.Font(None, 52)
-    text_surface1 = font.render(input_text1, True, (255, 255, 255))
-    text_surface2 = font.render(input_text2, True, (255, 255, 255))
-    window.blit(text_surface1, (input_rect1.x + 5, input_rect1.y + 5))
-    window.blit(text_surface2, (input_rect2.x + 5, input_rect2.y + 5))
-    pygame.display.update()
-
-# Uzavretie spojenia s databázou
-cursor.close()
-db.close()
-
-# Ukončenie Pygame
-pygame.quit()
+main_menu()

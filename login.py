@@ -10,7 +10,7 @@ def hash_password(password):
     return hashed_password
 
 
-def prihlasenie(username, password, cursor):
+def prihlasenie(username, password, cursor,db):
     if db is not None:
         query = "SELECT * FROM second WHERE meno = %s AND heslo = %s"#tu najdi chybu toto treba zmeniť bujaku heslo =...
         cursor.execute(query, (username, password))
@@ -86,7 +86,7 @@ def main():
                     username = input_text1
                     password = input_text2
                     hashed_password = hash_password(password)
-                    exists = prihlasenie(username, hashed_password, cursor)
+                    exists = prihlasenie(username, hashed_password, cursor,db)
                     if exists:
                         print("Prihlásenie úspešné.")
                         input_text1 = ''

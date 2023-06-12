@@ -142,6 +142,9 @@ def pong():
             while zastavene == True:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
+                        file = open("prihl.txt", "w")
+                        file.write("")
+                        file.close()
                         running = False
                         zastavene = False
                     if event.type == pygame.MOUSEBUTTONDOWN:

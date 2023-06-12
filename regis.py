@@ -14,7 +14,7 @@ def hash_password(password):
     hashed_password = hash_object.hexdigest()
     return hashed_password
 
-def check_username(username, hashed_password, cursor):
+def check_username(username, hashed_password, cursor,db):
     cursor = db.cursor()
     if db is not None:
         query = "SELECT * FROM second WHERE meno = %s"
@@ -92,7 +92,7 @@ def main():
                     username = input_text1
                     password = input_text2
                     hashed_password = hash_password(password)
-                    exists = check_username(username, hashed_password, cursor)
+                    exists = check_username(username, hashed_password, cursor,db)
                     if exists:
                         overenie=True
                         warningovanie = False
