@@ -15,6 +15,7 @@ def main():
     panak = [1,1]
     mixer.init()
     pygame.init()
+    prvycas = pygame.time.get_ticks()
     sound = mixer.Sound("ough-47202.wav")
     screen = pygame.display.set_mode((840, 660))
     f = open("labyrint.txt", "r")
@@ -41,8 +42,9 @@ def main():
     text2 = font.render("pre jedného hráča. Ulohou je aby", True, (255, 0, 0))
     text3 = font.render("sa hráč dostal na koniec bludiska.", True, (255, 0, 0))
     koniec = nadpis.render("Koniec!", True, (255, 255, 255))
+    meranie_casu = True
     while running==True:
-        cas = time.time()
+        caspotom = time.time()
         for event in pygame.event.get():
             pressed = pygame.key.get_pressed()
             if event.type == pygame.QUIT:
@@ -62,6 +64,7 @@ def main():
                 sound.play()
             elif labyrint[panak[1] + 1][panak[0]] == "U":
                 Vyhodnotenie=True
+                meranie_casu = True
             else:
                 panak[0] -= 1
             time.sleep(0.1)
@@ -70,6 +73,7 @@ def main():
                 sound.play()
             elif labyrint[panak[1] + 1][panak[0]] == "U":
                 Vyhodnotenie = True
+                meranie_casu = True
             else:
                 panak[1] -= 1
             time.sleep(0.1)
@@ -78,6 +82,7 @@ def main():
                 sound.play()
             elif labyrint[panak[1]+1][panak[0]] == "U":
                 Vyhodnotenie = True
+                meranie_casu = True
             else:
                 panak[1] += 1
             time.sleep(0.1)
@@ -122,13 +127,21 @@ def main():
                             running = False
                             zastavene = False
                             pygame.quit()
+                        stlacene1 = pygame.key.get_pressed()
+                        if stlacene1 == [pygame.K_ESCAPE]:
+                            zastavene = False
+
                     stlacene1 = pygame.key.get_pressed()
-                    if stlacene1[pygame.K_ESCAPE]:
+                    if stlacene1 == [pygame.K_ESCAPE]:
                         zastavene = False
+                stlacene1 = pygame.key.get_pressed()
+                if stlacene1==[pygame.K_ESCAPE]:
+                    zastavene = False
 
         else:
-            casik=cas/100000000
-            casik=round(casik,2)
+            if meranie_casu==True:
+                casik = round(time.time() - cas, 2)
+                meranie_casu = False
             subor = open("prihl.txt", "r")
             cita = subor.read()
             meno = cita
@@ -170,7 +183,7 @@ def main():
                         if xpsova < 500 and xpsova > 320 and ypsilonova < 420 and ypsilonova > 360:
                             main()
                 cislo = nadpis.render("Tvoj čas:"+str(casik) , True, (255, 0, 0))
-                screen.blit(cislo, (230, 300))
+                screen.blit(cislo, (280, 300))
                 screen.blit(koniec, (350, 250))
                 screen.blit(startmen, (320, 350))
                 screen.blit(minihrymen, (320, 420))
