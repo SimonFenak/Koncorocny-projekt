@@ -20,7 +20,6 @@ def check_username(username, hashed_password, cursor, db):
         query = "SELECT * FROM second WHERE meno = %s"
         cursor.execute(query, (username,))
         result = cursor.fetchone()
-        result = cursor.fetchall()
         cursor.close()
         if result:
             return True

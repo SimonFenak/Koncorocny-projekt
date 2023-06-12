@@ -22,7 +22,6 @@ cursor = db.cursor()
 query = "SELECT meno, raketka FROM second ORDER BY raketka DESC LIMIT 3"
 cursor.execute(query)
 raketkares = cursor.fetchmany(3)
-cursor.fetchall()
 raketprv=raketkares[0]
 raketdru=raketkares[1]
 rakettre=raketkares[2]
@@ -30,7 +29,6 @@ specifont="Press_Start_2P/PressStart2P-Regular.ttf"
 query = "SELECT meno,bludisko  FROM second ORDER BY bludisko DESC"
 cursor.execute(query)
 bludiskores = cursor.fetchmany(3)
-cursor.fetchall()
 bludisprv=bludiskores[0]
 bludisdru=bludiskores[1]
 bludistre=bludiskores[2]
@@ -38,7 +36,6 @@ bludistre=bludiskores[2]
 query = "SELECT meno,fareb FROM second ORDER BY fareb "
 cursor.execute(query)
 farebres = cursor.fetchmany(3)
-cursor.fetchall()
 farebprv=farebres[0]
 farebdru=farebres[1]
 farebtre=farebres[2]
@@ -102,15 +99,16 @@ def main_menu():
     pygame.display.flip()
     clock.tick(60)
 
-    while menu:
+    while menu==True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 file = open("prihl.txt", "w")
                 file.write("")
                 file.close()
-                menu=False
+                pygame.quit()
         button = get_button(prihlaseny)
         if button==0:
+            pygame.quit()
             menu=False
         print(button)
         pygame.display.flip()
