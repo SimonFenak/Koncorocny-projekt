@@ -19,7 +19,7 @@ db = mysql.connector.connect(
 )
 cursor = db.cursor()
 
-query = "SELECT meno, raketka FROM main ORDER BY raketka DESC LIMIT 3"
+query = "SELECT meno, raketka FROM second ORDER BY raketka DESC LIMIT 3"
 cursor.execute(query)
 raketkares = cursor.fetchmany(3)
 cursor.fetchall()
@@ -27,7 +27,7 @@ raketprv=raketkares[0]
 raketdru=raketkares[1]
 rakettre=raketkares[2]
 
-query = "SELECT meno,bludisko  FROM main ORDER BY bludisko DESC"
+query = "SELECT meno,bludisko  FROM secondORDER BY bludisko DESC"
 cursor.execute(query)
 bludiskores = cursor.fetchmany(3)
 cursor.fetchall()
@@ -35,7 +35,7 @@ bludisprv=bludiskores[0]
 bludisdru=bludiskores[1]
 bludistre=bludiskores[2]
 
-query = "SELECT meno,fareb FROM main ORDER BY fareb "
+query = "SELECT meno,fareb FROM second ORDER BY fareb "
 cursor.execute(query)
 farebres = cursor.fetchmany(3)
 cursor.fetchall()
