@@ -192,6 +192,7 @@ def hra():
                         if xpsova < 240 and xpsova > 60 and ypsilonova < 480 and ypsilonova > 400:
                             running = False
                             zastavene = False
+                            pygame.quit()
                 stlacene1 = pygame.key.get_pressed()
                 if stlacene1[pygame.K_ESCAPE]:
                     zastavene = False
