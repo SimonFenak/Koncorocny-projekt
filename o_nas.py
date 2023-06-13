@@ -19,7 +19,7 @@ def main():
 
     column_content = [
         font_content.render("Naše herné štúdio vzniklo v roku 2023 za účelom robenia koncoročného školského projektu.", True, (255, 255, 255)),
-        font_content.render("Členmi našeho tímu sú Jakub Petrila, Dominik Fečo a Šimon Feňak.", True, (255, 255, 255)),
+        font_content.render("Tvoria ho traja členovia: Jakub Petrila, Dominik Fečo a Šimon Feňak.", True, (255, 255, 255)),
 
     ]
 

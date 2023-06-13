@@ -14,7 +14,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # Load images
 card_images = []
 for i in range(1, 16):
-    image = pygame.image.load(f"pexesopics\{i}.png")  # Adjust the file name pattern
+    image = pygame.image.load(f"pexesopics/{i}.png")  # Adjust the file name pattern
     card_images.append(image)
 
 # Load background image
@@ -55,6 +55,7 @@ def check_matching_cards():
             if matching_pairs == len(cards) // 2:
                 print("You won!")
         else:
+            pygame.time.delay(1000)
             for i in selected_cards:
                 revealed[i] = False
         selected_cards.clear()
@@ -85,6 +86,8 @@ def main():
                     for i, rect in enumerate(cards_rects):
                         if rect.collidepoint(pos) and not revealed[i]:
                             revealed[i] = True
+                            draw_cards()
+                            pygame.display.flip()
                             selected_cards.append(i)
                             if len(selected_cards) == 2:
                                 check_matching_cards()
