@@ -36,6 +36,9 @@ def get_button(prihlaseny):
                 elif login_menu_rect.collidepoint(mouse_pos):
                     return "Login"
                 elif end_menu_rect.collidepoint(mouse_pos):
+                    subor = open("prihl.txt", "w")
+                    subor.write("")
+                    subor.close()
                     return 0
                 else:
                     break
