@@ -54,9 +54,9 @@ def volny_pad(pocet,cas):
     maly=pygame.font.Font(None, 25)
     nadpis = pygame.font.Font(None, 50)
     text = nadpis.render("Raketka!!", True, (255, 255, 255))
-    text1 = font.render("Vitajte v hre raketka hra je určená ", True, (255, 255, 255))
-    text2 = font.render("pre jedného hráča. Ulohou je dopraviť", True, (255, 255, 255))
-    text3 = font.render("raketku na bielu plošinku čo najviackrát", True, (255, 255, 255))
+    text1 = font.render("Vitajte v hre raketka, hra je určená ", True, (255, 255, 255))
+    text2 = font.render("pre jedného hráča. Úlohou je dopraviť", True, (255, 255, 255))
+    text3 = font.render("raketku na bielu plošinu čo najviackrát", True, (255, 255, 255))
     text5 = font.render("za dvadsať sekúnd!", True, (255, 255, 255))
     text4 = maly.render("(Hru pauzneš pomocou ESC)", True, (255, 255, 255))
     while running:
@@ -142,6 +142,8 @@ def volny_pad(pocet,cas):
             pygame.display.flip()
             clock.tick(60)
         else:
+            pygame.draw.rect(screen, (79, 90, 255), (330, 155, 510, 310))
+            pygame.draw.rect(screen, (41, 47, 133), (335, 160, 500, 300))
             screen.blit(sidemen, (0, 0))
             screen.blit(startmen, (60, 200))
             screen.blit(startmen, (60, 200))

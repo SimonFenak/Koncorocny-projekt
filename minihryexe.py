@@ -1,5 +1,6 @@
 import pygame
 from pygame .locals import *
+from pygame import mixer
 import time
 pygame.init()
 
@@ -11,7 +12,7 @@ SCREEN_WIDTH = 840
 SCREEN_HEIGHT = 660
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-def get_button():
+def get_button(sound):
     pong_game = pygame.image.load("pong-logo.png").convert_alpha()
     pong_game=pygame.transform.scale(pong_game, (200, 200))
     color_game = pygame.image.load("bludisko-logo.png").convert_alpha()
@@ -29,39 +30,47 @@ def get_button():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                sound.stop()
                 return 0
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 if pong_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import pong
                     pong.main_pong()
                     pygame.quit()
                 elif color_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     pygame.time.wait(500)
                     import pygame_bludisko
                     pygame_bludisko.main()
                     pygame.quit()
                 elif moon_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import raketka
                     raketka.main()
                     pygame.quit()
                 elif random_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import farebna_hra
                     farebna_hra.main()
                     pygame.quit()
 
                 elif random2_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import pexeso
                     pexeso.main()
                     pygame.quit()
 
 
                 elif random3_game_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import tabulka
                     tabulka.main_menu()
                     pygame.quit()
 
                 elif back_to_menu_rect.collidepoint(mouse_pos):
+                    sound.stop()
                     import menuexe
                     menuexe.main_menu()
                     pygame.quit()
@@ -84,18 +93,19 @@ def get_button():
 def main():
     menu = True
     clock = pygame.time.Clock()
+    sound = mixer.Sound("backgroundsong.wav")
+    sound.play()
     banner = pygame.image.load("background.jpg").convert_alpha()
     background = screen.blit(banner, (0,0))
     
     
     while menu:
-        button = get_button()
+        button = get_button(sound)
         if button == 0:
             menu = False
             pygame.quit()
             quit()
             
-        print(button)
         pygame.display.flip()
         clock.tick(60)
                 

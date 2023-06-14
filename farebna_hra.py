@@ -115,11 +115,11 @@ def hra():
     sidemen = pygame.transform.scale(side, (300, 660))
     font = pygame.font.Font(None, 36)
     nadpis = pygame.font.Font(None, 50)
-    text = nadpis.render("Farebné Štvorce!!", True, (0, 0, 0))
-    text1 = font.render("Vitajte v Farebnej hre je určená ", True, (0, 0, 0))
-    text2 = font.render("pre jedného hráčov. Ulohou je aby", True, (0, 0, 0))
-    text3 = font.render("hráč vymaľoval celé pole jednou farbou.", True, (0, 0, 0))
-    koniec = nadpis.render("Koniec!", True, (0, 0, 0))
+    text = nadpis.render("Farebné Štvorce!!", True, (255, 255, 255))
+    text1 = font.render("Vitajte v Farebnej hre je určená ", True, (255, 255, 255))
+    text2 = font.render("pre jedného hráčov. Úlohou je aby", True, (255, 255, 255))
+    text3 = font.render("hráč vymaľoval celé pole jednou farbou.", True, (255, 255, 255))
+    koniec = nadpis.render("Koniec!", True, (0,0,0))
     hodnot=False
     totalitnykonec=False
     pygame.display.flip()
@@ -157,6 +157,8 @@ def hra():
 
             clock.tick(60)
         else:
+            pygame.draw.rect(screen, (79, 90, 255), (330, 155, 510, 310))
+            pygame.draw.rect(screen, (41, 47, 133), (335, 160, 500, 300))
             screen.blit(sidemen, (0, 0))
             screen.blit(startmen, (60, 200))
             screen.blit(minihrymen, (60, 300))
@@ -171,7 +173,6 @@ def hra():
 
 
                 for event in pygame.event.get():
-
                     if event.type == pygame.QUIT:
                         if event.type == pygame.QUIT:
                             file = open("subor.txt", "w")

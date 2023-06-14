@@ -51,9 +51,9 @@ def pong():
     sidemen = pygame.transform.scale(side, (300, 660))
     font = pygame.font.Font(None, 36)
     nadpis = pygame.font.Font(None, 50)
-    text = nadpis.render("Ping Pong!!", True, (255, 255, 255))
-    text1= font.render("Vitajte v hre ping pong hra je určená ", True, (255, 255, 255))
-    text2 = font.render("pre dvoch hráčov. Ulohou je aby", True, (255, 255, 255))
+    text = nadpis.render("Pong!!", True, (255, 255, 255))
+    text1= font.render("Vitajte v hre pong, hra je určená ", True, (255, 255, 255))
+    text2 = font.render("pre dvoch hráčov. Úlohou je aby", True, (255, 255, 255))
     text3=font.render("hráči dostali kocku za protivníka.",True, (255, 255, 255))
     while running:
         for event in pygame.event.get():
@@ -128,6 +128,8 @@ def pong():
             pygame.display.flip()
             clock.tick(60)
         else:
+            pygame.draw.rect(screen, (79, 90, 255), (330, 155, 510, 310))
+            pygame.draw.rect(screen, (41, 47, 133), (335, 160, 500, 300))
             screen.blit(sidemen, (0, 0))
             screen.blit(startmen, (60, 200))
             screen.blit(startmen, (60, 200))
