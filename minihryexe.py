@@ -23,7 +23,7 @@ def get_button(sound):
     random_game = pygame.transform.scale(random_game, (180, 180))
     random2_game = pygame.image.load("My project.png").convert_alpha()
     random2_game = pygame.transform.scale(random2_game, (180, 180))
-    random3_game = pygame.image.load("tile.png").convert_alpha()
+    random3_game = pygame.image.load("tabulkadomenu.png").convert_alpha()
     back_to_menu = pygame.image.load("hlavnemenu.png").convert_alpha()
     end_menu = pygame.image.load("ukoncit1.png").convert_alpha()
 
