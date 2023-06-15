@@ -6,28 +6,27 @@ pygame.init()
 white = (255, 255, 255)
 black = (0, 0, 0)
 
-# SCREEN
+# Obrazovka
 SCREEN_WIDTH = 840
 SCREEN_HEIGHT = 660
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-# Load images
+# Načítanie obrázkov
 card_images = []
 for i in range(1, 16):
     image = pygame.image.load(f"pexesopics/{i}.png")  # Adjust the file name pattern
     card_images.append(image)
 
-# Load background image
+# Načítanie obrázku do pozadia
 background_image = pygame.image.load("pexesobackground.png")
 background_image = pygame.transform.scale(background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-# Cards
+# Karty
 cards = random.sample(range(1, len(card_images) + 1), len(card_images)) * 2
 random.shuffle(cards)
 revealed = [False for _ in cards]
 matching_pairs = 0
 
-# Card dimensions
 NUM_COLS = 6
 NUM_ROWS = 5
 GAP = 20
@@ -35,7 +34,7 @@ GAP = 20
 CARD_WIDTH = (SCREEN_WIDTH - (NUM_COLS + 1) * GAP) // NUM_COLS
 CARD_HEIGHT = (SCREEN_HEIGHT - (NUM_ROWS + 1) * GAP) // NUM_ROWS
 
-# Create cards
+# Vytvorenie kariet
 cards_rects = []
 for row in range(NUM_ROWS):
     for col in range(NUM_COLS):
@@ -46,7 +45,7 @@ for row in range(NUM_ROWS):
 
 selected_cards = []
 
-def check_matching_cards():
+def check_matching_cards(): #
     global selected_cards, matching_pairs
     if len(selected_cards) == 2:
         card1, card2 = selected_cards
@@ -59,7 +58,6 @@ def check_matching_cards():
             pygame.time.delay(1000)
             for i in selected_cards:
                 revealed[i] = False
-        return True
         selected_cards.clear()
 
 

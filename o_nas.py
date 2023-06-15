@@ -37,7 +37,7 @@ def main():
     button_rect = button_image.get_rect()
     button_rect.center = (width // 2, height - 75)
 
-    # Load and scale the image
+    # Načítanie a zmenšenie obrázka
     image = pygame.image.load("logo.png")
     image = pygame.transform.scale(image, (200, 200))
 
@@ -60,7 +60,7 @@ def main():
             content_rect = content.get_rect(center=(column_x, content_y + i * row_spacing))
             window.blit(content, content_rect)
 
-        # Draw the image below the text
+        # Zobrazenie obrázka pod textom
         image_rect = image.get_rect(center=(column_x, 200 + len(column_content) * row_spacing))
         window.blit(image, image_rect)
 

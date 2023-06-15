@@ -21,7 +21,7 @@ CISLA_FARIEB = tuple(FARBY.keys())
 
 
 
-def vytvor_pole():
+def vytvor_pole(): #Vytvorí pole s náhodnými farbami
     pole = []
     for _ in range(VYSKA):
         pole.append(random.choices(CISLA_FARIEB, k=SIRKA))
@@ -30,18 +30,18 @@ def vytvor_pole():
 
 
 
-def stvorec(x, y):
+def stvorec(x, y): #Vráti obdĺžnik pre dané súradnice
     return pygame.Rect(x * VELKOST, y * VELKOST, VELKOST, VELKOST)
 
 
 
 
-def vykresli_pole(screen, pole):
+def vykresli_pole(screen, pole): #Vykreslí pole na obrazovku
     for y, riadok in enumerate(pole):
         for x, index_farby in enumerate(riadok):
             pygame.draw.rect(screen, FARBY[index_farby], stvorec(x, y))
 
-def vylej_farbu(pole, farba_pred, farba, x, y):
+def vylej_farbu(pole, farba_pred, farba, x, y): #Vyfarbuje pole
     if farba_pred != pole[y][x]:
         return
     pole[y][x] = farba

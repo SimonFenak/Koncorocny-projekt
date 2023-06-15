@@ -4,13 +4,13 @@ pygame.init()
 white = (255, 255, 255)
 black = (0,0,0)
 
-#SCREEN
+#Šírka a výška obrazovky
 SCREEN_WIDTH = 840
 SCREEN_HEIGHT = 660
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 def get_button(prihlaseny):
-
+    #Načítanie obrázkov
     games_menu = pygame.image.load("minihry1.png").convert_alpha()
     about_menu = pygame.image.load("onas1.png").convert_alpha()
     end_menu = pygame.image.load("ukoncit1.png").convert_alpha()
@@ -42,7 +42,7 @@ def get_button(prihlaseny):
                     return 0
                 else:
                     break
-        
+        # Vykreslenie obrázkov a tlačidiel na obrazovku
         games_menu_rect = screen.blit(games_menu, (320, 300))
         about_menu_rect = screen.blit(about_menu, (320, 380))
         end_menu_rect = screen.blit(end_menu, (320, 460))
