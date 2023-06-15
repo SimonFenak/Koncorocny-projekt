@@ -206,6 +206,7 @@ def hra():
                 if event.type == pygame.QUIT:
                     if event.type == pygame.QUIT:
                         file = open("prihl.txt", "w")
+                        file.write("")
                         file.close()
                     totalitnykonec= True
                 if event.type == pygame.MOUSEBUTTONDOWN:

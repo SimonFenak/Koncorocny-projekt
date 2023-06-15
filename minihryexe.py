@@ -29,6 +29,9 @@ def get_button():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                file = open("prihl.txt", "w")
+                file.write("")
+                file.close()
                 return 0
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
@@ -67,6 +70,9 @@ def get_button():
                     pygame.quit()
 
                 elif end_menu_rect.collidepoint(mouse_pos):
+                    file = open("prihl.txt", "w")
+                    file.write("")
+                    file.close()
                     return 0
         pong_game_rect = screen.blit(pong_game, (50, 50))
         color_game_rect = screen.blit(color_game, (300, 50))
