@@ -73,7 +73,6 @@ def volny_pad(pocet,cas):
             if stlacenne[pygame.K_ESCAPE]:
                 zastavene = True
 
-                print("stavujem")
                 pygame.time.wait(500)
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_UP]:
@@ -92,7 +91,6 @@ def volny_pad(pocet,cas):
             pos_y-=rychlost_y
             rychlost_y-=GRAVITY
             if pos_y>=VYSKA-VELKOST-1 and int(rychlost_y)<-1:
-                print("Ši še rozbil")
                 rychlost_x=0
                 rychlost_y=0
                 konec=1
@@ -168,7 +166,6 @@ def volny_pad(pocet,cas):
                     stlacene1 = pygame.key.get_pressed()
                     if stlacene1[pygame.K_ESCAPE]:
                         zastavene = False
-                        print("ZASTAVUJEME")
 
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         xpsova, ypsilonova = event.pos
@@ -228,6 +225,8 @@ def volny_pad(pocet,cas):
                         pocet = 0
                         cas = time.time()
                         main(pocet, cas)
+            pygame.draw.rect(screen, (79, 90, 255), (170, 155, 510, 410))
+            pygame.draw.rect(screen, (41, 47, 133), (175, 160, 500, 400))
             cislo = nadpis.render("Počet úspešnych pokusov:" + str(pocet), True, (255, 255, 255))
             screen.blit(cislo, (200, 300))
             screen.blit(koniec, (350, 250))

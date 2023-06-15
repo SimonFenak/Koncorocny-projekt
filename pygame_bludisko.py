@@ -184,8 +184,10 @@ def main():
                             minihryexe.main()
                         if xpsova < 500 and xpsova > 320 and ypsilonova < 420 and ypsilonova > 360:
                             main()
-                cislo = nadpis.render("Tvoj čas:"+str(casik) , True, (255, 0, 0))
-                screen.blit(cislo, (280, 300))
+                pygame.draw.rect(screen, (79, 90, 255), (170, 155, 510, 410))
+                pygame.draw.rect(screen, (41, 47, 133), (175, 160, 500, 400))
+                cislo = nadpis.render("Tvoj čas: "+str(casik) , True, (255, 255, 255))
+                screen.blit(cislo, (300, 300))
                 screen.blit(koniec, (350, 250))
                 screen.blit(startmen, (320, 350))
                 screen.blit(minihrymen, (320, 420))

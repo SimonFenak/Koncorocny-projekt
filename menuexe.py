@@ -59,13 +59,11 @@ def main_menu():
     background = screen.blit(banner, (0,0))
     subor = open("prihl.txt")
     log = subor.read()
-    print(len(log))
     if len(log)!=0:
         prihlaseny = True
     
     while menu:
         button = get_button(prihlaseny)
-        print(button)
         if button == 0:
             menu = False
             pygame.quit()
@@ -83,7 +81,6 @@ def main_menu():
         elif button == "O nás":
             import o_nas
             o_nas.main()
-        print(button)
         pygame.display.flip()
         clock.tick(60)
                 

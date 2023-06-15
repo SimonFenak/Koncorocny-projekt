@@ -119,7 +119,7 @@ def hra():
     text1 = font.render("Vitajte v Farebnej hre je určená ", True, (255, 255, 255))
     text2 = font.render("pre jedného hráčov. Úlohou je aby", True, (255, 255, 255))
     text3 = font.render("hráč vymaľoval celé pole jednou farbou.", True, (255, 255, 255))
-    koniec = nadpis.render("Koniec!", True, (0,0,0))
+    koniec = nadpis.render("Koniec!", True, (255,255,255))
     hodnot=False
     totalitnykonec=False
     pygame.display.flip()
@@ -218,7 +218,9 @@ def hra():
                         minihryexe.main()
                     if xpsova < 500 and xpsova > 320 and ypsilonova < 420 and ypsilonova > 360:
                         main()
-            cislo = nadpis.render("Počet tvojich krokov " + vyhodnotenie(kroky), True, (0, 0, 0))
+            pygame.draw.rect(screen, (79, 90, 255), (170, 155, 510, 410))
+            pygame.draw.rect(screen, (41, 47, 133), (175, 160, 500, 400))
+            cislo = nadpis.render("Počet tvojich krokov " + vyhodnotenie(kroky), True, (255, 255, 255))
             screen.blit(cislo, (230, 300))
             screen.blit(koniec, (350, 250))
             screen.blit(startmen, (320, 350))
