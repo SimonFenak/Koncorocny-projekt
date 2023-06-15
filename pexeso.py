@@ -59,7 +59,6 @@ def check_matching_cards():
             pygame.time.delay(1000)
             for i in selected_cards:
                 revealed[i] = False
-        return True
         selected_cards.clear()
 
 

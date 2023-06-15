@@ -13,13 +13,13 @@ ACCEL_X=0.07
 pocet = 0
 cas = time.time()
 
-def stvorec(x, y):
+def stvorec(x, y):  #vytvorenie štvorec
     return pygame.Rect(int(x) , int(y) , VELKOST, VELKOST)
 
-def plocha(poziciar):
+def plocha(poziciar):     #vytvorenie plocha kde treba pristať
     return pygame.Rect(poziciar, VYSKA-5, 50,5 )
 
-def volny_pad(pocet,cas):
+def volny_pad(pocet,cas):   #main funkcia
     poziciar = random.randint(0, 790)
     color = (0, 0, 255)
     rychlost_y = 0.0

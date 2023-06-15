@@ -3,12 +3,12 @@ from pygame import mixer
 import time
 from pygame.locals import *
 import mysql.connector
-def kresli(screen,panak,labyrint):
+def kresli(screen,panak,labyrint):    #vyskleslovaňie všetkeho
     screen.fill((0, 0, 0))
     for i in range(len(labyrint)):
         for j in range(len(labyrint[i])):
             if labyrint[i][j] == "#":
-                pygame.draw.rect(screen,(255, 255, 50), pygame.Rect(j * 20,i * 20,20,20))
+                pygame.draw.rect(screen,(10, 155, 10), pygame.Rect(j * 20,i * 20,20,20))
     pygame.draw.circle(screen, (0,0,255), (panak[0]*20+10,panak[1]*20+10), 10)
     pygame.display.flip()  #komentar
 def main():
