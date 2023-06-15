@@ -99,11 +99,11 @@ def main():
     totalitnykonec = False
     maly = pygame.font.Font(None, 25)
     nadpis = pygame.font.Font(None, 50)
-    text = nadpis.render("Raketka!!", True, (255, 255, 255))
-    text1 = font.render("Vitajte v hre raketka, hra je určená ", True, (255, 255, 255))
-    text2 = font.render("pre jedného hráča. Úlohou je dopraviť", True, (255, 255, 255))
-    text3 = font.render("raketku na bielu plošinu čo najviackrát", True, (255, 255, 255))
-    text5 = font.render("za dvadsať sekúnd!", True, (255, 255, 255))
+    text = nadpis.render("Pexeso", True, (255, 255, 255))
+    text1 = font.render("Vitajte v hre pexeso, hra je určená ", True, (255, 255, 255))
+    text2 = font.render("pre jedného alebo viacerých hráčov. ", True, (255, 255, 255))
+    text3 = font.render("Úlohou je nájsť všetky páry s logami", True, (255, 255, 255))
+    text5 = font.render("futbalových tímov!", True, (255, 255, 255))
     text4 = maly.render("(Hru pauzneš pomocou ESC)", True, (255, 255, 255))
     while running:
         for event in pygame.event.get():
