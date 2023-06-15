@@ -53,12 +53,15 @@ def check_matching_cards():
         if cards[card1] == cards[card2]:
             matching_pairs += 1
             if matching_pairs == len(cards) // 2:
-                print("You won!")
+
+                return True
         else:
             pygame.time.delay(1000)
             for i in selected_cards:
                 revealed[i] = False
+        return True
         selected_cards.clear()
+
 
 def draw_cards():
     for i, rect in enumerate(cards_rects):
@@ -75,7 +78,34 @@ def draw_cards():
 def main():
     clock = pygame.time.Clock()
     running = True
-
+    zastavene = False
+    tlacitko = pygame.image.load("menu-bar.png")
+    mensie = pygame.transform.scale(tlacitko, (50, 50))
+    minihry = pygame.image.load("minihry1.png").convert_alpha()
+    minihrymen = pygame.transform.scale(minihry, (180, 80))
+    ukoncit = pygame.image.load("ukoncit1.png").convert_alpha()
+    ukoncitmen = pygame.transform.scale(ukoncit, (180, 80))
+    start = pygame.image.load("start.png").convert_alpha()
+    startmen = pygame.transform.scale(start, (180, 80))
+    side = pygame.image.load("sidebar.png").convert_alpha()
+    sidemen = pygame.transform.scale(side, (300, 660))
+    raketka = pygame.image.load("raketkabezohna.png").convert_alpha()
+    upravenaraketka = pygame.transform.scale(raketka, (60, 60))
+    raketkaohen = pygame.image.load("raketkazohonom.png").convert_alpha()
+    upravenaraketkaohen = pygame.transform.scale(raketkaohen, (60, 60))
+    font = pygame.font.Font(None, 36)
+    hodnot = False
+    nadpis = pygame.font.Font(None, 50)
+    koniec = nadpis.render("Koniec!", True, (255, 255, 255))
+    totalitnykonec = False
+    maly = pygame.font.Font(None, 25)
+    nadpis = pygame.font.Font(None, 50)
+    text = nadpis.render("Raketka!!", True, (255, 255, 255))
+    text1 = font.render("Vitajte v hre raketka, hra je určená ", True, (255, 255, 255))
+    text2 = font.render("pre jedného hráča. Úlohou je dopraviť", True, (255, 255, 255))
+    text3 = font.render("raketku na bielu plošinu čo najviackrát", True, (255, 255, 255))
+    text5 = font.render("za dvadsať sekúnd!", True, (255, 255, 255))
+    text4 = maly.render("(Hru pauzneš pomocou ESC)", True, (255, 255, 255))
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -90,14 +120,87 @@ def main():
                             pygame.display.flip()
                             selected_cards.append(i)
                             if len(selected_cards) == 2:
-                                check_matching_cards()
+                                hodnot=check_matching_cards()
+            stlacenne = pygame.key.get_pressed()
+            if stlacenne[pygame.K_ESCAPE]:
+                zastavene = True
 
-        screen.blit(background_image, (0, 0))
-        draw_cards()
-        pygame.display.flip()
-        clock.tick(60)
+        if zastavene==False:
+            screen.blit(background_image, (0, 0))
+            draw_cards()
+            pygame.display.flip()
+            clock.tick(60)
+        else:
+            pygame.draw.rect(screen, (79, 90, 255), (330, 155, 510, 310))
+            pygame.draw.rect(screen, (41, 47, 133), (335, 160, 500, 300))
+            screen.blit(sidemen, (0, 0))
+            screen.blit(startmen, (60, 200))
+            screen.blit(startmen, (60, 200))
+            screen.blit(minihrymen, (60, 300))
+            screen.blit(ukoncitmen, (60, 400))
+            screen.blit(mensie, (10, 10))
+            screen.blit(text, (350, 200))
+            screen.blit(text1, (350, 250))
+            screen.blit(text2, (350, 300))
+            screen.blit(text3, (350, 350))
+            screen.blit(text5, (350, 400))
+            screen.blit(text4, (350, 430))
+            pygame.display.flip()
+            while zastavene == True:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        file = open("prihl.txt", "w")
+                        file.write("")
+                        file.close()
+                        running = False
+                        zastavene = False
+                    stlacene1 = pygame.key.get_pressed()
+                    if stlacene1[pygame.K_ESCAPE]:
+                        zastavene = False
+
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        xpsova, ypsilonova = event.pos
+
+                        if xpsova < 240 and xpsova > 60 and ypsilonova < 280 and ypsilonova > 200:
+                            zastavene=False
+
+                        if xpsova < 240 and xpsova > 60 and ypsilonova < 380 and ypsilonova > 300:
+                            import minihryexe
+                            minihryexe.main()
+                            running = False
+                            zastavene = False
+                        if xpsova < 240 and xpsova > 60 and ypsilonova < 480 and ypsilonova > 400:
+                            running = False
+                            zastavene = False
+                pygame.display.flip()
+        if hodnot==True:
+            while totalitnykonec == False:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        file = open("prihl.txt", "w")
+                        file.write("")
+                        file.close()
+                        totalitnykonec = True
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        xpsova, ypsilonova = event.pos
+                        if xpsova < 500 and xpsova > 320 and ypsilonova < 560 and ypsilonova > 505:
+                            pygame.quit()
+                        if xpsova < 500 and xpsova > 320 and ypsilonova < 490 and ypsilonova > 430:
+                            import minihryexe
+                            minihryexe.main()
+                pygame.draw.rect(screen, (79, 90, 255), (170, 155, 510, 410))
+                pygame.draw.rect(screen, (41, 47, 133), (175, 160, 500, 400))
+                hlaska = nadpis.render("Si frajer dal si to!!", True, (255, 255, 255))
+                screen.blit(hlaska, (270, 300))
+                screen.blit(koniec, (350, 250))
+                screen.blit(minihrymen, (320, 420))
+                screen.blit(ukoncitmen, (320, 490))
+                pygame.display.flip()
+            pygame.display.flip()
+
 
     pygame.quit()
 
-if __name__ == "__main__":
+def main_hlavny():
     main()
+main_hlavny()

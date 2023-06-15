@@ -12,7 +12,7 @@ def kresli(screen,panak,labyrint):
     pygame.draw.circle(screen, (0,0,255), (panak[0]*20+10,panak[1]*20+10), 10)
     pygame.display.flip()  #komentar
 def main():
-    panak = [1,1]
+    panak = [25,25]
     mixer.init()
     pygame.init()
     prvycas = pygame.time.get_ticks()
@@ -178,7 +178,7 @@ def main():
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         xpsova, ypsilonova = event.pos
                         if xpsova < 500 and xpsova > 320 and ypsilonova < 560 and ypsilonova > 505:
-                            totalitnykonec = True
+                            pygame.quit()
                         if xpsova < 500 and xpsova > 320 and ypsilonova < 490 and ypsilonova > 430:
                             import minihryexe
                             minihryexe.main()
