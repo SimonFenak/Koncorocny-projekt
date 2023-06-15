@@ -42,7 +42,7 @@ farebres = cursor.fetchmany(3)
 farebprv=farebres[0]
 farebdru=farebres[1]
 farebtre=farebres[2]
-def get_button(prihlaseny):
+def get_button(prihlaseny):   #tlacitka fungovanie aby sa na nich dalo kliknuť tote colide pointy
     games_menu = pygame.image.load("minihry1.png").convert_alpha()
 
     while True:

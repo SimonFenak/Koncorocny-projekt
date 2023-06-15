@@ -3,18 +3,14 @@ from pygame.locals import *
 import mysql.connector
 import hashlib
 
-def hash_password(password):
-    # Vytvorenie objektu pre hashovanie
+def hash_password(password):  #zašifrovanie hesla
     hash_object = hashlib.sha256()
-    # Konverzia hesla na bajty
     password_bytes = password.encode('utf-8')
-    # Aktualizácia objektu hashu s heslom
     hash_object.update(password_bytes)
-    # Získanie zahashovaného reťazca
     hashed_password = hash_object.hexdigest()
     return hashed_password
 
-def check_username(username, hashed_password, cursor, db):
+def check_username(username, hashed_password, cursor, db): #funkcia slúži na overenie náhodou už neexistuje user s takym menom
     cursor = db.cursor()
     if db is not None:
         query = "SELECT * FROM second WHERE meno = %s"

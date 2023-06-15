@@ -4,13 +4,13 @@ import mysql.connector
 import hashlib
 
 
-def hash_password(password):
+def hash_password(password):  #zašifrovanie hesla
     # Hash hesla pomocou SHA-256
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
     return hashed_password
 
 
-def prihlasenie(username, password, cursor,db):
+def prihlasenie(username, password, cursor,db):   #funkcia lsluží na overenie či v databáze už exustuje taky user s heslom takym
     if db is not None:
         query = "SELECT * FROM second WHERE meno = %s AND heslo = %s"#tu najdi chybu toto treba zmeniť bujaku heslo =...
         cursor.execute(query, (username, password))

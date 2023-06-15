@@ -8,14 +8,14 @@ BALL_SIZE = 20
 BALL_SPEED = 8
 
 
-def stvorec(x, y):
+def stvorec(x, y):   #vytvorenie štvorca
     return pygame.Rect(int(x), int(y), BALL_SIZE, BALL_SIZE)
 
-def plosky(x, y):
+def plosky(x, y):       #vytvorenie štvorca
     return pygame.Rect(int(x), int(y), 10, 100)
-def menu():
+def menu():         #vytvorenie menu
     return pygame.Rect(100, 100, 50, 50)
-def pause():
+def pause():                #pauza vytvorenie
     return pygame.Rect(0, 0, 300,660)
 
 def pong():
