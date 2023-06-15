@@ -54,9 +54,9 @@ def volny_pad(pocet,cas):
     maly=pygame.font.Font(None, 25)
     nadpis = pygame.font.Font(None, 50)
     text = nadpis.render("Raketka!!", True, (255, 255, 255))
-    text1 = font.render("Vitajte v hre raketka hra je určená ", True, (255, 255, 255))
-    text2 = font.render("pre jedného hráča. Ulohou je dopraviť", True, (255, 255, 255))
-    text3 = font.render("raketku na bielu plošinku čo najviackrát", True, (255, 255, 255))
+    text1 = font.render("Vitajte v hre raketka, hra je určená ", True, (255, 255, 255))
+    text2 = font.render("pre jedného hráča. Úlohou je dopraviť", True, (255, 255, 255))
+    text3 = font.render("raketku na bielu plošinu čo najviackrát", True, (255, 255, 255))
     text5 = font.render("za dvadsať sekúnd!", True, (255, 255, 255))
     text4 = maly.render("(Hru pauzneš pomocou ESC)", True, (255, 255, 255))
     while running:
@@ -73,7 +73,6 @@ def volny_pad(pocet,cas):
             if stlacenne[pygame.K_ESCAPE]:
                 zastavene = True
 
-                print("stavujem")
                 pygame.time.wait(500)
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_UP]:
@@ -92,7 +91,6 @@ def volny_pad(pocet,cas):
             pos_y-=rychlost_y
             rychlost_y-=GRAVITY
             if pos_y>=VYSKA-VELKOST-1 and int(rychlost_y)<-1:
-                print("Ši še rozbil")
                 rychlost_x=0
                 rychlost_y=0
                 konec=1
@@ -142,6 +140,8 @@ def volny_pad(pocet,cas):
             pygame.display.flip()
             clock.tick(60)
         else:
+            pygame.draw.rect(screen, (79, 90, 255), (330, 155, 510, 310))
+            pygame.draw.rect(screen, (41, 47, 133), (335, 160, 500, 300))
             screen.blit(sidemen, (0, 0))
             screen.blit(startmen, (60, 200))
             screen.blit(startmen, (60, 200))
@@ -166,7 +166,6 @@ def volny_pad(pocet,cas):
                     stlacene1 = pygame.key.get_pressed()
                     if stlacene1[pygame.K_ESCAPE]:
                         zastavene = False
-                        print("ZASTAVUJEME")
 
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         xpsova, ypsilonova = event.pos
@@ -226,6 +225,8 @@ def volny_pad(pocet,cas):
                         pocet = 0
                         cas = time.time()
                         main(pocet, cas)
+            pygame.draw.rect(screen, (79, 90, 255), (170, 155, 510, 410))
+            pygame.draw.rect(screen, (41, 47, 133), (175, 160, 500, 400))
             cislo = nadpis.render("Počet úspešnych pokusov:" + str(pocet), True, (255, 255, 255))
             screen.blit(cislo, (200, 300))
             screen.blit(koniec, (350, 250))

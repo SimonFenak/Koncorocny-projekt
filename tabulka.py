@@ -118,7 +118,6 @@ def main_menu():
             import minihryexe
             minihryexe.main()
             pygame.quit()
-        print(button)
         pygame.display.flip()
         clock.tick(60)
 
