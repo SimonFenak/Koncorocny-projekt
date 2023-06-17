@@ -12,7 +12,7 @@ def kresli(screen,panak,labyrint):    #vyskleslovaňie všetkeho
     pygame.draw.circle(screen, (0,0,255), (panak[0]*20+10,panak[1]*20+10), 10)
     pygame.display.flip()  #komentar
 def main():
-    panak = [25,25]
+    panak = [1,1]
     mixer.init()
     pygame.init()
     prvycas = pygame.time.get_ticks()

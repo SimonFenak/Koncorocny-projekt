@@ -45,7 +45,7 @@ for row in range(NUM_ROWS):
 
 selected_cards = []
 
-def check_matching_cards(): #
+def check_matching_cards(): #Kontroluje páry
     global selected_cards, matching_pairs
     if len(selected_cards) == 2:
         card1, card2 = selected_cards
@@ -61,7 +61,7 @@ def check_matching_cards(): #
         selected_cards.clear()
 
 
-def draw_cards():
+def draw_cards(): #Vykreslí karty
     for i, rect in enumerate(cards_rects):
         if revealed[i]:
             pygame.draw.rect(screen, white, rect)
@@ -73,10 +73,10 @@ def draw_cards():
         else:
             pygame.draw.rect(screen, black, rect)
 
-def main():
+def main(): #Hlavná časť programu
     clock = pygame.time.Clock()
     running = True
-    zastavene = False
+    zastavene = True
     tlacitko = pygame.image.load("menu-bar.png")
     mensie = pygame.transform.scale(tlacitko, (50, 50))
     minihry = pygame.image.load("minihry1.png").convert_alpha()
@@ -109,7 +109,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # Left mouse button
+                if event.button == 1:  
                     pos = pygame.mouse.get_pos()
                     for i, rect in enumerate(cards_rects):
                         if rect.collidepoint(pos) and not revealed[i]:
